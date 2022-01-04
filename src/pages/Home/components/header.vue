@@ -5,7 +5,7 @@
     <div class="bc">
       <div class="header_input">
         <span class="iconfont icon-caidan"></span>
-        <div class="input">
+        <div class="input" @click="goto">
           <div class="jd"></div>
           <span class="iconfont icon-fangdajing"></span>
           <span class="inner">dell台式机</span>
@@ -43,6 +43,11 @@
 
 <script>
 export default {
+  methods:{
+    goto(){
+      this.$router.push('/search')
+    }
+  }
   
 }
 </script>
