@@ -4,6 +4,7 @@ import  home from '../pages/Home/home.vue'
 import search from '../pages/search/search.vue'
 import denglu from '../pages/denglu/denglu.vue'
 import yearday from '../pages/yearday/home.vue'
+import chaoshi from '../pages/chaoshi/home.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,10 @@ export default new Router({
     {
       path:'/yearday',
       component:yearday
+    },
+    {
+      path:'/chaoshi',
+      component:chaoshi
     }
   ]
 })
