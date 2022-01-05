@@ -5,14 +5,14 @@
     <div class="bc">
       <div class="header_input">
         <span class="iconfont icon-caidan"></span>
-        <div class="input" @click="goto">
+        <div class="input" @click="goto('/search')">
           <div class="jd"></div>
           <span class="iconfont icon-fangdajing"></span>
           <span class="inner">dell台式机</span>
         </div>
-        <div class="button">登录</div>  
+        <div class="button" @click="goto('/denglu')">登录</div>  
      </div>  
-    <div class="lunbocon">
+    <div class="lunbocon"  @click="goto('/yearday')">
        <img class="lunbo" src="//m.360buyimg.com/mobilecms/s700x280_jfs/t1/166350/30/25542/46462/61d10029E639ac57c/2b76918672fa765e.jpg!cr_1053x420_4_0!q70.jpg.dpg" alt="" />
     </div>
     <div class="xiaoqiuqiu">
@@ -44,8 +44,8 @@
 <script>
 export default {
   methods:{
-    goto(){
-      this.$router.push('/search')
+    goto(target){
+      this.$router.push(target)
     }
   }
   
