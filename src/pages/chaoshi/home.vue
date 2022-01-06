@@ -320,19 +320,23 @@ img
             white-space nowrap
             overflow hidden 
             text-overflow ellipsis
-            width 130px 
+            width 130px
             margin 25px 0 21px
           .footer
             display flex
+            position relative
             .quan
               font-size 18px
               margin-right 57px
             .shop
-              width 30px
-              height 30px
+              width 25px
+              height 25px
               background-color #fa4e13
-              border-radius 30px
+              border-radius 25px
               display flex
+              position absolute
+              top -4px
+              right  40px
               img
                 width 100%
                 height 100%
@@ -356,6 +360,7 @@ img
             margin 25px 0 21px
           .footer
             display flex
+            position relative
             .quan
               font-size 18px
               margin-right 57px
@@ -365,6 +370,9 @@ img
               background-color #fa4e13
               border-radius 25px
               display flex
+              position absolute
+              top -4px
+              right  0
               img
                 width 100%
                 height 100%

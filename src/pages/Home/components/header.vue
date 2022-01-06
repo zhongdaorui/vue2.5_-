@@ -23,7 +23,7 @@
     <div class="bolu">
       <img src="//img20.360buyimg.com/img/jfs/t1/218165/29/5441/29775/619c8f94E646ece0c/5e01de9461456633.png.webp" alt="">
     </div>
-    <div class="swiper">
+    <div class="swiper"  @click="goto('/chaoshi')">
       <div class="contain" v-for="item in 10">
         <img src="//m.360buyimg.com/mobilecms/s120x120_jfs/t1/175540/24/19329/6842/60ec0b0aEf35f7384/ec560dbf9b82b90b.png!q70.jpg.dpg" alt="">
         <span>京东超市</span>
@@ -74,13 +74,14 @@ export default {
       margin-bottom 6px
       display flex
       .icon-caidan
-        font-size 18px
+        font-size 22px !important
         color #fff
         font-weight 700
         z-index 3
+       
       .input
         width 344px
-        line-height  100%
+        line-height  32px
         background-color #fff
         margin 0 14px
         border-radius 10px
@@ -105,7 +106,7 @@ export default {
             right -8px
         .icon-fangdajing
           position absolute    
-          top 4px
+          top 1px
           left 55px
           font-size 22px
           color #c0c0c0
@@ -113,7 +114,7 @@ export default {
           font-size 14px
           color #c0c0c0  
       .button
-        font-size 18px
+        font-size 22px
         color #fff
         font-weight 500
         z-index 4

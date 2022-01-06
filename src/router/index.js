@@ -5,6 +5,7 @@ import search from '../pages/search/search.vue'
 import denglu from '../pages/denglu/denglu.vue'
 import yearday from '../pages/yearday/home.vue'
 import chaoshi from '../pages/chaoshi/home.vue'
+import miaosha from '../pages/miaosha/home.vue'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export default new Router({
     {
       path:'/chaoshi',
       component:chaoshi
+    },
+    {
+      path:'/miaosha',
+      component:miaosha
     }
   ]
 })

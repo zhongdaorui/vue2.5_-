@@ -3,7 +3,7 @@
     <div class="contain">
       <div class="first">
         <div class="top_title">
-          <span class="sha">京东秒杀</span>
+          <span class="sha"  @click="goto('/miaosha')">京东秒杀</span>
           <span class="ten">10</span>
           <div class="time">
             <span class="time_b">
@@ -98,7 +98,12 @@
 
 <script>
 export default {
+  methods:{
+   goto(target){
+      this.$router.push(target)
+  }
   
+}
 }
 </script>
 
