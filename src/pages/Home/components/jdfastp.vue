@@ -23,7 +23,7 @@
             <span class="iconfont icon-jiantouzuo"></span>
           </span>
         </div>
-        <div class="b_two_pic">
+        <div class="b_two_pic" @click="goto('/detail')">
           <div class="left">
             <img class="one" src="//img11.360buyimg.com/n7/s150x150_jfs/t1/172459/38/3843/197273/60755be6E394a013c/fd4d660e949fe121.jpg.dpg" alt="">
             <span>￥185</span>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div class="twofor">
+      <div class="twofor"  @click="goto('/detail')">
         <div class="fx">
           <div class="w_left" v-for="item in 100">
             <img src="//img10.360buyimg.com/mobilecms/s360x360_jfs/t1/101797/25/20527/331496/61d1b1cfE02136f73/2cc5757994b124cc.jpg!q70.dpg.webp" alt="">

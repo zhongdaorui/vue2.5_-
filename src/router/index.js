@@ -6,6 +6,7 @@ import denglu from '../pages/denglu/denglu.vue'
 import yearday from '../pages/yearday/home.vue'
 import chaoshi from '../pages/chaoshi/home.vue'
 import miaosha from '../pages/miaosha/home.vue'
+import detail from '../pages/detail/home.vue'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
     {
       path:'/miaosha',
       component:miaosha
+    },
+    {
+      path:'/detail',
+      component:detail
     }
+
   ]
 })
