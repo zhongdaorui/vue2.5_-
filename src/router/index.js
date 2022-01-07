@@ -7,6 +7,9 @@ import yearday from '../pages/yearday/home.vue'
 import chaoshi from '../pages/chaoshi/home.vue'
 import miaosha from '../pages/miaosha/home.vue'
 import detail from '../pages/detail/home.vue'
+import fenlei from '../pages/fenlei/home.vue'
+import xiajiang from '../pages/jiangjia/home.vue'
+ 
 
 Vue.use(Router)
 
@@ -14,32 +17,68 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: home
+      component: home,
+      meta: {
+        showFooter: true
+      }
     },
     {
       path:'/search',
-      component:search
+      component:search,
+      meta: {
+        showFooter: false
+      }
     },
     {
       path:'/denglu',
-      component:denglu
+      component:denglu,
+      meta: {
+        showFooter: false
+      }
     },
     {
       path:'/yearday',
-      component:yearday
+      component:yearday,
+      meta: {
+        showFooter: false
+      }
     },
     {
       path:'/chaoshi',
-      component:chaoshi
+      component:chaoshi,
+      meta: {
+        showFooter: false
+      }
     },
     {
       path:'/miaosha',
-      component:miaosha
+      component:miaosha,
+      meta: {
+        showFooter: false
+      }
     },
     {
       path:'/detail',
-      component:detail
+      component:detail,
+      meta: {
+        showFooter: false
+      }
+    },
+    {
+      path:'/fenlei',
+      component:fenlei,
+      meta: {
+        showFooter: true
+      }
+    },
+    {
+      path:'/xiajiang',
+      component:xiajiang,
+      meta:{
+        showFooter:false
+      }
     }
+  
 
   ]
 })

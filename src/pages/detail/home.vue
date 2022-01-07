@@ -3,7 +3,7 @@
       <div class="top">
         <div class="swiper_top">
           <img src="//m.360buyimg.com/mobilecms/s750x750_jfs/t1/212226/14/10322/235110/61d5d0a4E5d4cc919/571b8b61966da6c0.jpg!q80.dpg.webp" alt="">
-          <span class="iconfont icon-jiantou_zuo"></span>
+          <span class="iconfont icon-jiantou_zuo" @click="goto"></span>
           <span class="iconfont icon-caidan"></span>
           <span>00'30''</span>
           <span>1/10</span>
@@ -153,7 +153,11 @@
 
 <script>
 export default {
-  
+  methods:{
+    goto(){
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
