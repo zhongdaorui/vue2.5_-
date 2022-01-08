@@ -28,7 +28,7 @@
           </div>
           <div>福祥亮 黄金999转运珠散珠金珠子纯金3D硬金路路通圆珠手链古法金珠光珠吊坠珠佛珠隔珠隔片固珠 5MM镭射珠 金重0.20-0.25g</div>
           <div>
-            <span>足金999黄金-支持鉴定复检-线下批发老店-黄金散珠产品售<br/>价不含证书税点，如需证书发票请联系客服补税点费用，有收据盖章！！</span>
+            <span>足金999黄金-支持鉴定复检-线下批发老店-黄金散珠产品售<br/>价不含证书税点,如需证书发票请联系客服补税点费用,有收据盖章！！</span>
           </div>
         </div>  
       </div>
@@ -38,7 +38,7 @@
           <span>优惠</span>
           <span>
             <em>满减</em>
-            每满200元，可减20元现金
+            每满200元,可减20元现金
           </span>
           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURUdwTIyMjCYmJiYmJi0tLY+PjyYmJidnOsIAAAAGdFJOUwDt6aYcSSEXj/YAAAA8SURBVCjPY2AYBTQBLEbKDhiCTmlpKggeq2AAiDJLS0tGcBkFBUActbS0JAY4F6sgVu1YLcLnpFFAFQAATwgLKVhjC9UAAAAASUVORK5CYII" alt="">
         </div>
@@ -74,7 +74,7 @@
                 </li>
               </ul>
             </div>
-            <div>趁活动买来给老公的礼物，老公很喜欢，三周年结婚纪念日快乐哈哈</div>
+            <div>趁活动买来给老公的礼物,老公很喜欢,三周年结婚纪念日快乐哈哈</div>
             <div>
               <ul>
                 <li v-for="item in 4">
@@ -93,7 +93,7 @@
               <span>问答</span>
             </div>
             <div class="right">
-              <span>暂无提问信息，
+              <span>暂无提问信息,
                 <em>去提问</em>
               </span>
               <span class="iconfont icon-jiantouzuo"></span>

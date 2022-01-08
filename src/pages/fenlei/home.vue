@@ -1,7 +1,7 @@
 <template>
   <div class="warp">
     <nav>
-      <span class="iconfont icon-jiantou_zuo"></span>
+      <span class="iconfont icon-jiantou_zuo" @click="goto"></span>
       <div class="input">
         <span class="iconfont icon-fangdajing"></span>       
         <span class="mei">美孚一号</span>
@@ -38,7 +38,11 @@
 
 <script>
 export default {
-  
+  methods:{
+    goto(){
+      this.$router.replace('/')
+    }
+  }
 }
 </script>
 

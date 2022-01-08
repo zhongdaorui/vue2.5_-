@@ -9,9 +9,19 @@ import miaosha from '../pages/miaosha/home.vue'
 import detail from '../pages/detail/home.vue'
 import fenlei from '../pages/fenlei/home.vue'
 import xiajiang from '../pages/jiangjia/home.vue'
- 
+import personal from '../pages/personal/home.vue'
+import shopcart from '../pages/shopcart/home.vue'
+
 
 Vue.use(Router)
+
+const originalPush = Router.prototype.push
+
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
+
 
 export default new Router({
   routes: [
@@ -77,8 +87,21 @@ export default new Router({
       meta:{
         showFooter:false
       }
+    },
+    {
+      path:'/personal',
+      component:personal,
+      meta:{
+        showFooter:true
+      }
+    },
+    {
+      path:'/shopcart',
+      component:shopcart,
+      meta:{
+        showFooter:true
+      }
     }
-  
 
   ]
 })

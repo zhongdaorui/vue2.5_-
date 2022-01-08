@@ -4,7 +4,7 @@
       <router-link to="/" class="back">
         <span class="iconfont icon-jiantou_zuo"></span>
       </router-link>
-      <span class="fu">服饰到家 新春报喜</span>
+      <span class="fu">{{title}}</span>
       <span class="iconfont icon-caidan"></span>
   </div>  
   
@@ -14,7 +14,9 @@
 
 <script>
 export default {
-  
+  props:{
+    title:String
+  }
 }
 </script>
 

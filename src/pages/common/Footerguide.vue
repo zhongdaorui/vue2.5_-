@@ -1,22 +1,22 @@
 <template>
   <div class="warp">
-    <div>
+    <div class="guide_item" @click="goto('/')"  :class="{active:$route.path=='/'}">
       <span class="iconfont icon-jingdong"></span>
-      <span>首页</span>
+      <span class="wei">首页</span>
     </div>
-    <div @click="goto('/fenlei')">
-      <span class="iconfont icon-fenlei"></span>
-      <span>分类</span>
+    <div @click="goto('/fenlei')" class="guide_item" :class="{active:$route.path=='/fenlei'}">
+      <span class="iconfont icon-fenlei" ></span>
+      <span class="wei">分类</span>
     </div>
-    <div>
-      <span class="iconfont icon-jiangjia"></span>
-      <span>京喜</span>
+    <div @click="goto('/xiajiang')" class="guide_item"  :class="{active:$route.path=='/xiajiang'}">
+      <span class="iconfont icon-jiangjia" ></span>
+      <span class="wei">京喜</span>
     </div>
-    <div>
+    <div @click="goto('/shopcart')" class="guide_item"  :class="{active:$route.path=='/shopcart'}">
       <span class="iconfont icon-gouwucheman"></span>
-      <span>购物车</span>
+      <span class="wei">购物车</span>
     </div>
-     <div>
+     <div @click="goto('/personal')" class="guide_item"  :class="{active:$route.path=='/personal'}">
       <span class="iconfont icon-gerenyonghutouxiang2"></span>
       <span class="wei">未登录</span>
     </div>
@@ -47,21 +47,21 @@ export default {
   right 0
   bottom 0 
   background-color #fff
-  div
+  .guide_item
     margin-right 40px
     display flex
     flex-flow column
-    & span:nth-of-type(1)
-      font-size 22px
-      color #a8a8a8
-      text-indent 0.5em      
-    & span:nth-of-type(2)
+    align-items center
+    margin-right 65px
+    &.active
+      color red
+    .iconfont
+      font-size 20px
+    .wei
       font-size 12px
-      padding 4px 
-      width 50px
-      // text-align center
+      white-space nowrap
+      padding 3px 0
   & div:nth-child(5)
-    margin-right 0
-  .wei
-    margin-left -3px  
+    margin-right 0       
+
 </style>
