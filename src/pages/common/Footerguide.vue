@@ -18,7 +18,7 @@
     </div>
      <div @click="goto('/personal')" class="guide_item"  :class="{active:$route.path=='/personal'}">
       <span class="iconfont icon-gerenyonghutouxiang2"></span>
-      <span class="wei">未登录</span>
+      <span class="wei">我的</span>
     </div>
 
   </div>
@@ -53,12 +53,13 @@ export default {
     flex-flow column
     align-items center
     margin-right 65px
+    color #ccc
     &.active
       color red
     .iconfont
       font-size 20px
     .wei
-      font-size 12px
+      font-size 11px !important
       white-space nowrap
       padding 3px 0
   & div:nth-child(5)

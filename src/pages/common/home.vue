@@ -5,7 +5,7 @@
         <span class="iconfont icon-jiantou_zuo"></span>
       </router-link>
       <span class="fu">{{title}}</span>
-      <span class="iconfont icon-caidan"></span>
+      <span class="iconfont icon-ellipsis"></span>
   </div>  
   
 </div>  
@@ -38,12 +38,14 @@ export default {
       font-weight 700
   .fu
     position absolute
-    font-size 20px
+    font-size 22px
     top 18px
-    left 160px
-  .icon-caidan
+    left 199px
+  .icon-ellipsis
     position absolute
-    right 6px
+    right 26px
     top 17px
-    font-size 25px
+    font-size 30px
+    font-weight 700
+   
 </style>
