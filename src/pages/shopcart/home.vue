@@ -13,7 +13,7 @@
          
         </div>
     </div>
-    <div class="list_content">
+    <div class="list_content"  v-for="k in 3">
       <div class="list_content_container">
         <div class="chckbox">
           <span class="iconfont icon-duigou"></span>
@@ -46,7 +46,51 @@
         </div>
       </div>
     </div>
-  
+    <img  src="https://img12.360buyimg.com/img/s694x148_jfs/t1/171999/12/22113/58222/61bad82eE0dcf6d31/d92d1e829bf953da.png" alt="">
+    <div class="tuijian1">
+      <span class="left"></span>
+      <span>为您推荐</span>
+      <span class="right"></span>
+    </div>
+    <div class="tuijianlist">
+        <div class="tui_content" v-for="k in 100">
+          <img src="//img10.360buyimg.com/mobilecms/s350x350_jfs/t1/198474/1/4100/136168/611f74d1Eb802b043/0c0e5cecb17f4048.jpg!q70.dpg.webp" alt="">
+          <div class="ziyin">
+            <div class="ziyinbox">
+              <img class="img" src="//img12.360buyimg.com/jdphoto/s48x28_jfs/t18820/32/891260489/1085/d4b6cf2c/5aadf9dbN7043e607.png.webpc=" alt="">
+              <span>
+                周六福珠宝 多金牛 足
+              </span>
+            </div>
+           
+            <p>金黄金转运珠女款生肖牛手绳 定价 AD166116 1-1.2g</p>
+          </div>
+          <div class="footer_money">
+            <span>
+              ￥<em>1038</em>
+            </span>
+            <span>秒杀</span>
+          </div>
+        </div>
+    </div>
+    <div class="jisuan">
+      <div class="j_left">
+        <span class="iconfont icon-duigou"></span>
+        <span>全选</span>
+      </div>
+      <div class="j_middle">
+        <span>
+          总计：
+          <em>￥4470.30</em>
+        </span>
+        <span>已优惠745.7元</span>
+      </div>
+      <div class="j_right">
+        <span>去结算
+          <em>(7件)</em>
+        </span>
+      </div>
+    </div>
               
             
 
@@ -65,8 +109,7 @@ export default {
 
 <style lang="stylus" scoped>
 .warp
-  background-color #ccc
-  height 1500px
+  background-color rgb(242 242 242)
   .header_top
     .di
       background-color #fff
@@ -79,6 +122,9 @@ export default {
       position relative
       border-radius 0 0 15px 15px
       .left
+        position absolute
+        top 18px
+        left 24px
         & span:first-child
           font-size 18px
           margin-right 0px
@@ -106,12 +152,13 @@ export default {
   .list_content
     margin-top 15px
     background-color #fff
-    padding 26px 19px 27px
+    padding 21px 19px 27px
     border-radius 10px
     width 100%
-    height 216px
+    height 266px
     box-sizing border-box
     position relative
+    margin-bottom 10px
     .list_content_container
       
       .chckbox
@@ -174,8 +221,11 @@ export default {
           font-weight 700    
         img
           width 120px
-          height 96px
+          height 118px
           margin-right 16px
+          border-radius 9px
+          overflow hidden
+          margin-top -3px
         .datalist
           display flex
           flex 1
@@ -234,17 +284,180 @@ export default {
       .tixin
         position absolute
         right 23px
-        bottom 28px
+        top 225px
         font-size 12px
         & span:first-child
           margin-right 22px
           &:after
             position absolute
-            top 0
+            bottom  0
             left 69px
             content ''
             display inline-block
             height 15px
             width 1px
             background-color #ccc
+  img
+    width 100%
+    margin 18px 0 18px 
+  .tuijian1
+      line-height 45px
+      font-size 14px
+      color #ccc
+      text-align center
+      display flex
+      position relative
+      .left
+        width 160px
+        height 1px
+        background-color #ccc
+        position absolute
+        top 20px
+        left 25px
+      .right
+        position absolute
+        top 20px
+        right  25px
+        width 160px
+        height 1px
+        background-color #ccc
+      & span:nth-child(2)
+        margin-left 208px 
+  .tuijianlist
+
+      width 100%
+      // background-color #ccc
+      border-radius 15px
+      display flex
+      flex-flow row wrap
+      .tui_content
+        background-color #fff
+        display flex
+        flex-flow column
+        margin-right 3px
+        margin-bottom 3px
+        width 233px
+        height 290px
+        padding 20px 25px 4px
+        border-radius 10px
+        box-sizing border-box
+        img
+          width 183px
+          height 185px
+          margin-bottom 15px
+        .ziyin
+          margin-bottom 4px
+          .img
+            width 31px
+            height 15px
+            margin-right 10px
+            margin-bottom 3px
+          .ziyinbox
+            display flex
+            span
+              font-size 13px 
+              white-space nowrap     
+          p
+            font-size 12px
+            flex 1
+            text-overflow ellipsis
+            overflow hidden
+            white-space nowrap
+        .footer_money
+          & span:first-child
+            font-size 13px
+            color red
+            margin-right 1px
+            em
+              font-size 18px
+              font-weight 700
+          & span:last-child
+            width 30px
+            height 15px
+            line-height 15px
+            color red
+            font-size 12px
+            border 1px solid red
+            padding 0px 3px
+            border-radius 5px
+            box-sizing border-box
+            margin-top -2px
+      & .tui_content:nth-child(2n)
+        margin-right 0
+  .jisuan
+    width 100%
+    background-color #fff
+    position fixed                 
+    left 0
+    right 0
+    bottom 57px
+    display flex
+    box-shadow 0 3px 3px #ebeaec
+    border-top 1px solid #ebeaec
+    border-bottom 2px solid black
+    height 56px
+    .j_left
+      flex 18.76%
+      margin-left 15px
+      margin-top 10px
+      .icon-duigou
+        border-radius 13.5px
+        width 27px
+        height 27px
+        line-height 27px
+        text-align center
+        font-weight 700
+        background-color red
+        color #fff
+        font-size 16px
+        margin-right 1px
+      & span:last-child
+        font-size 15px  
+    .j_middle
+      flex 45.77%
+      display flex      
+      flex-flow column
+      margin-left 56px
+      margin-top  12px
+      position relative
+      & span:first-child
+        font-size 17px
+        line-height 19px
+        em
+          font-weight 700
+          margin-left -10px
+      & span:last-child    
+        margin-left 35px
+        font-size 14px
+      &:after
+        content ''  
+        display inline-block
+        background  url('./下载.svg') no-repeat 
+        position-size 16px 12px
+        width 16px
+        height 12px
+        position absolute
+        top 15px
+        right 20px
+        transform rotate(90deg)
+    .j_right
+      flex 36.15%
+      height 43px
+      line-height 43px
+      background-color red
+      border-radius 40px
+      overflow hidden
+      white-space nowrap
+      margin-top 6px
+      span
+        font-size 18px
+        padding 9px 22px
+        color #fff
+        font-weight 700
+        em
+          font-weight 500
+          font-size 18px
+          font-weight 500
+
+
 </style>
