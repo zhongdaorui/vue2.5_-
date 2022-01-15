@@ -328,7 +328,7 @@ export default {
           display flex
           flex-flow column
           align-items center
-          margin-right 53px
+          margin-right 52px
           margin-bottom 15px
           img
             width 48px
@@ -372,9 +372,9 @@ export default {
         background-color #fff
         display flex
         flex-flow column
-        margin-right 3px
+        margin-right 15px
         margin-bottom 3px
-        width 233px
+        width 210px
         height 290px
         padding 20px 25px 4px
         border-radius 10px

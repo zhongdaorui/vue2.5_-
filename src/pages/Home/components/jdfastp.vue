@@ -176,12 +176,12 @@ export default {
         .left,.right
           display flex
           flex-flow column
-          margin-right 30px
+          margin-right 10px
           text-align center
           .one
-            width 200px
+            width 190px
             height 218px
-            margin-left 3px
+            margin-left 0px
             margin-bottom 8px
           .two
             width 200px
@@ -209,7 +209,7 @@ export default {
           border-radius 6px
           background-color #fff
           img
-            width 216px
+            width 176px
             height 216px
           .w_left_contain
             padding 7px 10px 15px

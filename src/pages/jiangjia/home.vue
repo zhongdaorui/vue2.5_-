@@ -13,7 +13,7 @@
          </ul>
        </div>
         <div class="shangp"   v-for="(item,index) of shangping" :key="index" :class="[num === index ? 'tab-item' :'none']">
-          <div class="contain" v-for="k in 30">
+          <div class="contain" v-for="k in 50">
             <div class="left">
               <img :src="item" alt=""   >
             </div>
@@ -54,7 +54,7 @@
 export default {
   data(){
     return{  
-      tabs:["自营",'母婴玩具','上新','生活百货','手机平板','酒水饮料','家清纸品','米面粮油','箱包配饰','数码配件','大小家电','生鲜水果','美妆个护','休闲零食'],
+    tabs:["自营",'母婴玩具','上新','生活百货','手机平板','酒水饮料','家清纸品','米面粮油','箱包配饰','数码配件','大小家电','生鲜水果','美妆个护','休闲零食'],
       shangping:[
         'https://img14.360buyimg.com/n1/jfs/t1/173122/29/2084/178844/606ac5eeE6cf4583d/7e331dd734bf343b.png',
         'https://img14.360buyimg.com/n1/jfs/t1/199895/10/15887/363703/618492a6Eda49b386/ea413c23c166e39d.png',

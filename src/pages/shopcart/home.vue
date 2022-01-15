@@ -59,7 +59,7 @@
             <div class="ziyinbox">
               <img class="img" src="//img12.360buyimg.com/jdphoto/s48x28_jfs/t18820/32/891260489/1085/d4b6cf2c/5aadf9dbN7043e607.png.webpc=" alt="">
               <span>
-                周六福珠宝 多金牛 足
+                周六福珠宝多金牛足
               </span>
             </div>
            
@@ -334,11 +334,11 @@ export default {
         background-color #fff
         display flex
         flex-flow column
-        margin-right 3px
+        margin-right 15px
         margin-bottom 3px
-        width 233px
-        height 290px
-        padding 20px 25px 4px
+        width 210px
+        height 300px
+        padding 20px 15px 4px
         border-radius 10px
         box-sizing border-box
         img
@@ -347,16 +347,19 @@ export default {
           margin-bottom 15px
         .ziyin
           margin-bottom 4px
-          .img
-            width 31px
-            height 15px
-            margin-right 10px
-            margin-bottom 3px
+         
           .ziyinbox
             display flex
+            height 22px
             span
               font-size 13px 
-              white-space nowrap     
+              white-space nowrap
+            .img
+              width 31px
+              height 15px
+              margin-right 0px
+              margin-bottom 3px   
+              margin-top -1px    
           p
             font-size 12px
             flex 1

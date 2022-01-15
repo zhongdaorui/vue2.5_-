@@ -114,10 +114,11 @@ export default {
           font-size 14px
           color #c0c0c0  
       .button
-        font-size 22px
+        font-size 18px
         color #fff
         font-weight 500
         z-index 4
+        white-space nowrap
   .lunbocon
     width 437px
     height 169px
@@ -157,7 +158,7 @@ export default {
     .contain
       display flex
       flex-flow column 
-      margin-right 34px
+      margin-right 30px
       font-size 12px
       img
         width 50px
