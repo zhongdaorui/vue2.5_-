@@ -40,7 +40,7 @@ export default {
     position absolute
     font-size 22px
     top 18px
-    left 199px
+    left 170px
   .icon-ellipsis
     position absolute
     right 26px

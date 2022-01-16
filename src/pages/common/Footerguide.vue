@@ -16,21 +16,25 @@
       <span class="iconfont icon-gouwucheman"></span>
       <span class="wei">购物车</span>
     </div>
-     <div @click="goto('/personal')" class="guide_item"  :class="{active:$route.path=='/personal'}">
+     <router-link :to="userinfo.username? '/personal':'/denglu'"  class="guide_item"  :class="{active:$route.path=='/personal'}">
       <span class="iconfont icon-gerenyonghutouxiang2"></span>
       <span class="wei">我的</span>
-    </div>
+     </router-link>
 
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
  methods:{
    goto(path){
      this.$router.replace(path)
    }
- } 
+ },
+ computed:{
+    ...mapState(['userinfo'])
+  } 
 }
 </script>
 

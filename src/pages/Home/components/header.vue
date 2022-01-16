@@ -10,7 +10,11 @@
           <span class="iconfont icon-fangdajing"></span>
           <span class="inner">dell台式机</span>
         </div>
-        <div class="button" @click="goto('/denglu')">登录</div>  
+        <router-link :to="userinfo.username? '/personal':'/denglu'" class="ispersonal" active-class="ccc">
+          <div  v-if="userinfo.username" class="iconfont icon-gerenyonghutouxiang2"></div> 
+          <div class="button" v-else>登录</div> 
+        </router-link>
+        
      </div>  
     <div class="lunbocon"  @click="goto('/yearday')">
        <img class="lunbo" src="//m.360buyimg.com/mobilecms/s700x280_jfs/t1/166350/30/25542/46462/61d10029E639ac57c/2b76918672fa765e.jpg!cr_1053x420_4_0!q70.jpg.dpg" alt="" />
@@ -42,11 +46,15 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   methods:{
     goto(target){
       this.$router.push(target)
     }
+  },
+  computed:{
+    ...mapState(['userinfo'])
   }
   
 }
@@ -112,13 +120,20 @@ export default {
           color #c0c0c0
         .inner
           font-size 14px
-          color #c0c0c0  
-      .button
-        font-size 18px
+          color #c0c0c0 
+      .ispersonal
+      .ccc
         color #fff
-        font-weight 500
-        z-index 4
-        white-space nowrap
+        .button
+          font-size 18px
+          color #fff
+          font-weight 500
+          z-index 4
+          position relative
+          white-space nowrap
+        .icon-gerenyonghutouxiang2
+          font-size 25px      
+          position relative
   .lunbocon
     width 437px
     height 169px

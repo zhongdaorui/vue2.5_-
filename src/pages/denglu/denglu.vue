@@ -6,20 +6,32 @@
       </router-link>
       <span class="title">京东登录注册</span>
     </div>
-    <div class="model">
+    <div class="model" v-if="loginway">
       <div class="top">
         <span class="eight">+86</span>
         <span class="iconfont icon-jinrujiantou"></span>
-        <input type="text" name="username" value="请输入手机号码">
+        <input type="text" name="username" placeholder="请输入手机号码" v-model="phone">
       </div>
       <div class="bottom">
-        <input type="text" name="password" value="请输入收到的验证码"> 
+         <input type="text" name="password" placeholder="请输入收到的验证码" v-model="captch"> 
         <span class="huo">获取验证码</span>
       </div>
     </div>
-    <div class="d_button">登录</div>
+    <div class="mima" v-else>
+      <div class="top">
+        <input type="text" name="username" placeholder="用户名/邮箱/手机号" v-model="username">
+      </div>
+      <div class="bottom">
+        <input type="text" name="password" v-if="showpwd" placeholder="请输入密码" v-model="mima">
+        <input type="password" v-else   placeholder="请输入密码" v-model="mima">  
+        <span v-if="showpwd" @click="changeshow(false)" class="wenben"></span>
+        <span v-else @click="changeshow(true)"  class="mima"></span>
+        <span class="wang">忘记密码</span>
+      </div>
+    </div>
+    <div class="d_button" @click="login">登录</div>
     <div class="footer">
-      <div class="left">账号密码登录</div>
+      <div class="left"  @click="changelogin">{{loginway?'账号密码快速登录':'短信登陆'}}</div>
       <div class="right">手机快速注册</div>
     </div>
    
@@ -29,11 +41,45 @@
 
 <script>
 export default {
+  data(){
+    return{
+      loginway:false,
+      phone:'',
+      captch:'',
+      username:'',
+      mima:'',
+      showpwd:false
+    }
+  },
+  methods:{
+    changelogin(ismima){
+      this.loginway = !this.loginway
+     
+    },
+    changeshow(isshow){
+      this.showpwd = isshow
+    },
+    login(){
+      if(this.loginway){
+        return
+      }else{
+        const {username,mima} = this
+        this.$store.dispatch('getUserinfo',({username,mima}))
+         console.log('点击了')
+      }
+      
+    }
   
+  }
+
+
+
+
+
+
 }
+
 </script>
-
-
 <style lang="stylus" scoped>
 .warp
   background-color #fff
@@ -58,9 +104,9 @@ export default {
     .top,.bottom
       border-bottom 1px solid #c8c8c8 
       display flex
-      padding-bottom 20px
+      padding-bottom 14px
       .eight
-        font-size 22px
+        font-size 18px
         color black
         font-weight 500
         margin-right 6px
@@ -72,8 +118,9 @@ export default {
         color black
       input
         flex 1
-        font-size 20px
+        font-size 19px
         color #c8c8c8
+        
     .bottom
       margin-top 34px
       display flex
@@ -86,11 +133,59 @@ export default {
         height 20px
         padding-left 25px
         border-left 1px solid #a8a8a8
-        font-size 20px
+        font-size 16px
         line-height 20px
         text-align center  
         box-sizing border-box
         color #a8a8a8
+  .mima
+    margin-top 62px
+    margin-bottom 36px
+    .top,.bottom
+      border-bottom 1px solid #c8c8c8 
+      display flex
+      
+    .top
+      font-size 19px  
+    .bottom
+      margin-top 80px
+      font-size 19px
+      position relative
+      >input
+        bottom  15px
+        left 0
+        position absolute
+      .wang
+        position absolute
+        bottom  15px
+        right 15px  
+        font-size 17px
+       
+        &:before
+          position absolute
+          left -30px
+          top -5px
+          content ''
+          display inline-block
+          width 2px
+          height 25px
+          background-color #ccc
+      .mima
+        width 32px
+        height 34px
+        position absolute
+        bottom -30px
+        left 197px
+        background-size contain
+        display inline-block
+        background url('./img/密码.png') no-repeat left top/100% auto
+      .wenben
+        background url('./img/文本.png') no-repeat left top/100% auto
+        width 32px
+        height 34px
+        position absolute
+        left 197px
+        bottom 7px
   .d_button
     line-height 61px
     width 100%
@@ -98,7 +193,7 @@ export default {
     color #fff
     font-size 18px
     background-color #fcb7b3
-    border-radius 9px
+    border-radius 39px
   .footer
     font-size 17px
     color #c8c8c8

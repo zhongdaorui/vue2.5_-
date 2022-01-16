@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import 'amfe-flexible/index.js'
 import './assets/styles/reset.css'
+import store  from './store'   
+import 'store2'
 
 Vue.config.productionTip = false
 
@@ -13,5 +15,6 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store
 })

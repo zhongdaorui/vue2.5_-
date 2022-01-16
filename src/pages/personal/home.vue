@@ -6,7 +6,7 @@
         <img src="https://img11.360buyimg.com/jdphoto/s120x120_jfs/t21160/90/706848746/2813/d1060df5/5b163ef9N4a3d7aa6.png" alt="">
         <div class="username">
           <div class="top">
-            <span>jd_188727wcn</span>
+            <span>{{userinfo.username}}</span>
             <div class="sprte"></div>
           </div>
           <div class="bottom">
@@ -95,6 +95,7 @@
 
 <script>
 import HeaderTop from '../common/home.vue'
+import {mapState} from 'vuex'
 
 export default {
   components:{
@@ -104,6 +105,9 @@ export default {
     return{
      
     }
+  },
+  computed:{
+    ...mapState(['userinfo'])
   }
 }
 </script>
@@ -131,6 +135,7 @@ export default {
         height 60px
         margin-right 13px
       .username
+        position relative
         .top
           display flex
           margin-bottom 2px
@@ -147,6 +152,10 @@ export default {
               height 20px
               background: url(https://img12.360buyimg.com/img/s300x60_jfs/t1/113596/13/13099/22116/5f1a4bddEb7f1a190/8581e1b9765e15ff.png) no-repeat scroll 0 0/cover; 
         .bottom
+          position absolute
+          left 0
+          top 27px
+          white-space nowrap
           & span:first-child
             width 45px
             line-height 18px
@@ -156,7 +165,7 @@ export default {
             border-radius 10px
             background-color black
             color #fff
-            margin-right 8px
+            margin-right 1px
           & span:last-child  
             width 117px
             line-height  22px
