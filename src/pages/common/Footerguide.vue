@@ -56,7 +56,7 @@ export default {
     display flex
     flex-flow column
     align-items center
-    margin-right 65px
+    margin-right 60px
     color #ccc
     &.active
       color red

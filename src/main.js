@@ -5,8 +5,12 @@ import App from './App'
 import router from './router'
 import 'amfe-flexible/index.js'
 import './assets/styles/reset.css'
-import store  from './store'   
-import 'store2'
+import store  from './store'
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css';
+Vue.use(Mint);
+
+
 
 Vue.config.productionTip = false
 

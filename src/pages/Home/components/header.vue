@@ -3,7 +3,7 @@
   <div class="pbc"></div>
   <div class="warp">
     <div class="bc">
-      <div class="header_input">
+    <div class="header_input">
         <span class="iconfont icon-caidan"></span>
         <div class="input" @click="goto('/search')">
           <div class="jd"></div>
@@ -15,30 +15,11 @@
           <div class="button" v-else>登录</div> 
         </router-link>
         
-     </div>  
-    <div class="lunbocon"  @click="goto('/yearday')">
-       <img class="lunbo" src="//m.360buyimg.com/mobilecms/s700x280_jfs/t1/166350/30/25542/46462/61d10029E639ac57c/2b76918672fa765e.jpg!cr_1053x420_4_0!q70.jpg.dpg" alt="" />
-    </div>
-    <div class="xiaoqiuqiu">
-      <ul>
-        <li v-for="item in 8"></li>
-      </ul>
-    </div>
-    <div class="bolu">
-      <img src="//img20.360buyimg.com/img/jfs/t1/218165/29/5441/29775/619c8f94E646ece0c/5e01de9461456633.png.webp" alt="">
-    </div>
-    <div class="swiper"  @click="goto('/chaoshi')">
-      <div class="contain" v-for="item in 10">
-        <img src="//m.360buyimg.com/mobilecms/s120x120_jfs/t1/175540/24/19329/6842/60ec0b0aEf35f7384/ec560dbf9b82b90b.png!q70.jpg.dpg" alt="">
-        <span>京东超市</span>
-      </div>
-    </div>
-    <div class="twoqiuqiu">
-      <ul>
-        <li v-for="item in 2"></li>
-      </ul>
-    </div>
-    
+    </div>  
+    <swiper :list=" imgarr">
+    </swiper> 
+    <iconlist/>
+  
     
   </div>
 </div>
@@ -46,15 +27,32 @@
 </template>
 
 <script>
+import iconlist from './iconlist.vue'
+import swiper from '../../common/swiper.vue'
 import {mapState} from 'vuex'
+
 export default {
-  methods:{
-    goto(target){
-      this.$router.push(target)
+  data(){
+    return{
+       imgarr:['//m15.360buyimg.com/mobilecms/s1062x420_jfs/t1/214309/30/9926/212128/61d3a663E061f9640/09ab0fd159edda28.jpg!cr_1053x420_4_0!q70.jpg',
+    '//m15.360buyimg.com/mobilecms/jfs/t1/19443/1/18105/145107/61d9181dEfe5ef64e/233097eae6cb302c.jpg!cr_1125x449_0_166!q70.jpg',
+    '//m15.360buyimg.com/mobilecms/jfs/t1/166485/27/24897/191752/61e0f27cE20fa3b16/ea7338be79f26899.png!cr_1053x420_4_0!q70.jpg',
+    '//m15.360buyimg.com/mobilecms/jfs/t1/174441/33/26579/157326/61e381baE127e4c37/c8f8612a6045e1f5.jpg!cr_1125x449_0_166!q70.jpg',
+    '//m15.360buyimg.com/mobilecms/s1062x420_jfs/t1/214309/30/9926/212128/61d3a663E061f9640/09ab0fd159edda28.jpg!cr_1053x420_4_0!q70.jpg',
+    '//m15.360buyimg.com/mobilecms/jfs/t1/143500/28/26035/80894/61d54fffE1a196764/ec06073a338c78eb.jpg!cr_1053x420_4_0!q70.jpg'],
+  
     }
+   
   },
   computed:{
     ...mapState(['userinfo'])
+  },
+  
+  
+ 
+  components:{
+    swiper,
+    iconlist
   }
   
 }
@@ -67,10 +65,8 @@ export default {
   left 0
   right 0
   height 150px
-  background-color #c82519
-  
+  background-color #c82519 
 .warp
-  
   padding 8px 15px  
   background-color #f6f6f6
   .bc
@@ -79,7 +75,7 @@ export default {
       width 100%
       height 35px
       line-height 35px
-      margin-bottom 6px
+      margin-bottom 200px
       display flex
       .icon-caidan
         font-size 22px !important
@@ -123,7 +119,7 @@ export default {
           color #c0c0c0 
       .ispersonal
       .ccc
-        color #fff
+        // color #fff
         .button
           font-size 18px
           color #fff
@@ -133,56 +129,12 @@ export default {
           white-space nowrap
         .icon-gerenyonghutouxiang2
           font-size 25px      
-          position relative
-  .lunbocon
-    width 437px
-    height 169px
-    border-radius 6px
-    overflow hidden
-    position absolute
-    top 56px
-    left 15px
-    img
-      width 100%
- 
-  .xiaoqiuqiu
-    margin-top 273px 
-    text-align center 
-    margin-bottom 42px
-    ul
-      display flex
-      margin-left 186px
-      li
-        width 6px
-        height 6px
-        border-radius 6px
-        background-color #fff
-        margin-right 3px
-      li:nth-child(1)  
-        background-color red
-  .bolu
-    width 432px
-    height 106px
-    margin-bottom 30px
-    img
-      width 100%
-      height 100%
-  .swiper
-    display flex
-    flex-wrap wrap
-    .contain
-      display flex
-      flex-flow column 
-      margin-right 30px
-      font-size 12px
-      img
-        width 50px
-        height 43px
-      span
-        padding-top 12px 
-        padding-bottom 15px    
-    .contain:nth-child(5n)
-      margin-right 0
+          position relative       
+          color #ccc
+          // background-color #ccc
+  
+    
+   
   .twoqiuqiu
     text-align center 
     margin-bottom 30px
@@ -196,5 +148,6 @@ export default {
         background-color #fff
         margin-right 3px
       li:nth-child(1)  
-        background-color red        
+        background-color red 
+
 </style>

@@ -6,7 +6,7 @@
         <img src="https://img11.360buyimg.com/jdphoto/s120x120_jfs/t21160/90/706848746/2813/d1060df5/5b163ef9N4a3d7aa6.png" alt="">
         <div class="username">
           <div class="top">
-            <span>{{userinfo.username}}</span>
+            <span >{{userinfo.username?userinfo.username:'请登录'}}</span>
             <div class="sprte"></div>
           </div>
           <div class="bottom">
@@ -62,12 +62,12 @@
          
         </div>
       </div>
-      <div class="tuijian1">
+      <div class="tuijian1" v-show="!userinfo.username">
         <span class="left"></span>
         <span>为您推荐</span>
         <span class="right"></span>
       </div>
-      <div class="tuijianlist">
+      <div class="tuijianlist" v-if="!userinfo.username">
         <div class="tui_content" v-for="k in 100">
           <img src="//img10.360buyimg.com/mobilecms/s350x350_jfs/t1/198474/1/4100/136168/611f74d1Eb802b043/0c0e5cecb17f4048.jpg!q70.dpg.webp" alt="">
           <div class="ziyin">
@@ -88,14 +88,39 @@
           </div>
         </div>
       </div>
+      <div class="username" v-else >
+        <div class="logo"></div>
+        <div class="footer_nav">
+          <span>{{userinfo.username}}</span>
+          <span @click.prevent="loginout">退出</span>
+          <span>客户服务</span>
+          <span>返回顶部</span>
+        </div>
+        <div class="downway">
+          <div>
+            <img src="//m.360buyimg.com/mobilecms/jfs/t16423/186/2517573622/5186/75a541f7/5ab1c0deN947bdcba.png" alt="">
+            
+          </div>
+           <div>
+            <img src="//m.360buyimg.com/mobilecms/jfs/t18550/294/898388074/6574/3a8c5413/5ab0b8e9Ne9c48331.png" alt="">
+           
+          </div>
+           <div>
+            <img src="//m.360buyimg.com/mobilecms/jfs/t14581/218/2689195961/4696/203b872a/5ab1c0f2N51c3f1bb.png" alt="">
+            
+          </div>
+        </div>
+        <div class="lastfooter">Copyright © 2004-2022 京东JD.com 版权所有</div>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
+import { MessageBox, Toast } from 'mint-ui'
 import HeaderTop from '../common/home.vue'
-import {mapState} from 'vuex'
+import {mapState,mapActions} from 'vuex'
 
 export default {
   components:{
@@ -106,8 +131,22 @@ export default {
      
     }
   },
+  mounted(){
+  
+  },
   computed:{
-    ...mapState(['userinfo'])
+    ...mapState(['userinfo']),
+    
+  },
+  methods:{
+   loginout(){
+     MessageBox.confirm('确定退出吗?').then(action => {
+        this.$store.dispatch('loginout')
+        this.$router.replace('/')
+})
+
+     
+   }
   }
 }
 </script>
@@ -122,8 +161,6 @@ export default {
     width 100%
     display flex
     flex-flow column nowrap
-    
-    
     .top_user
       padding 16px 24px 0
       box-sizing border-box
@@ -144,6 +181,7 @@ export default {
             color #fff
           .sprte
             position relative
+            left 0
             &:after
               content ''
               position absolute
@@ -431,8 +469,65 @@ export default {
             margin-top -2px
       & .tui_content:nth-child(2n)
         margin-right 0
+    .username
+      background-color #fff
+      padding-bottom 77px
+      .logo
+        background url('./img/下载.png') no-repeat center/100% auto
+        width 134px
+        height 40px
+        margin-left 163px
+        margin-bottom 86px
+      .footer_nav
+        border-top 1px solid #ccc
+        border-bottom 1px solid #ccc
+        color #ccc
+        padding 23px 23px
+        box-sizing border-box
+        font-size 17px
+        display flex
+        
+        height 64px   
+        span
+          flex 1
+          position relative
+          text-align center     
+          &:after
+            content ''    
+            display inline-block
+            position absolute
+            right 0
+            top 0
+            width 1px
+            height 16px
+            background-color #ccc
+        & span:first-child
+          white-space nowrap
+          text-overflow ellipsis
+          overflow hidden
+      .downway
+        display flex
+        border-bottom 1px solid #ccc
+        height 80px
+        width 100%
+        padding 5px 23px
+        box-sizing border-box
+        div
+          font-size 15px
+          color #ccc
+          margin-right 95px
+          img
+            width 68px
+            height 68px
+        & div:last-child
+          margin-right 0       
+      .lastfooter
+        font-size 15px   
+        color #ccc
+        margin 15px 65px 77px
+       
+        
 
-  
 
 
 
