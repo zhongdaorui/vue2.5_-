@@ -1,6 +1,6 @@
 <template>
 <div>
-  <nav-top/>
+  <nav-top title="超市"/>
   <div class="swiper">
     <img src="//m.360buyimg.com/babel/jfs/t1/160171/9/25685/82914/61d3c462Eea4c05a6/293fd30a80b2280b.jpg!q70.webp" alt="">
     <span class="iconfont icon-fangdajing"></span>
@@ -138,7 +138,7 @@ export default {
     position absolute
     left 15px
     top 5px
-    width 434px
+    width 414px
     line-height 41px
     border-radius 15px
     backgronud-color #fff
@@ -153,7 +153,7 @@ img
     li
       display flex
       flex-flow column
-      margin 0 13px 9px 0 
+      margin 0 5px 9px 0 
       img
         width 72px
         height 72px
@@ -347,7 +347,7 @@ img
         flex-wrap wrap
         li
           list-sytle:none !import
-          margin-right 27px
+          margin-right 15px
           img
             width 130px
             height 154px

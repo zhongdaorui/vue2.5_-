@@ -151,10 +151,10 @@ export default {
         flex-wrap wrap
         margin-bottom 10px
         .lists
-          width 146px
+          width 140px
           height 200px
           background-color #d9a3e4
-          margin-right 6px
+          margin-right 0px
           margin-bottom 6px
           border-radius 8px
           img
