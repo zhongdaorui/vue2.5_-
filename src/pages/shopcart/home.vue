@@ -2,15 +2,17 @@
   <div class="warp">
     <div class="header_top">
         <header-top title="购物车"/>
-        <div class="di">
+        <div class="di" v-if="!showAllDelete">
           <div class="left">
              <span class="iconfont icon-31dingwei"></span>
              <span>武汉市江夏区</span>
           </div>
           <div class="right">
-            <span>编辑商品</span>
+            <span @click="toggledelete">编辑商品</span>
           </div>
-         
+        </div>
+        <div class="delete" v-else>
+          <span @click="toggledelete">完成</span>
         </div>
     </div>
     <div class="list_content"  v-for="k in 3">
@@ -73,12 +75,12 @@
           </div>
         </div>
     </div>
-    <div class="jisuan">
+    <div class="jisuan" v-if="!showAllDelete">
       <div class="j_left">
         <span class="iconfont icon-duigou"></span>
         <span>全选</span>
       </div>
-      <div class="j_middle">
+      <div class="j_middle" @click="togglezhezhao">
         <span>
           总计：
           <em>￥4470.30</em>
@@ -86,13 +88,43 @@
         <span>已优惠745.7元</span>
       </div>
       <div class="j_right">
-        <span>去结算
+        <span>领卷结算
           <em>(7件)</em>
         </span>
       </div>
     </div>
-              
-            
+    <div class="shouchang" v-else>
+      <div class="left">
+        <span class="iconfont icon-duigou"></span>
+        <span>全选</span>
+      </div>
+      <div class="right">
+        <span >移至收藏</span>
+        <span>删除</span>
+      </div>
+    </div>
+    <div class="zhezhao" v-show="showzhezhao" ></div>         
+    <div class="monnyshow" v-show="true">
+      <div class="h3">
+        <h3>金额明细</h3>
+        <span class="tuichu"></span>
+      </div>
+      <div class="allmonny">
+        <span>商品总额</span>
+        <span>￥874.00</span>
+      </div>
+      <div class="allmonny">
+      <span>促销</span>
+      <span>-￥87.00</span>
+      </div>
+      <div class="youhui">
+        <div class="left">
+          <p>共优惠</p>
+          <span>以上优惠不包含红包和京豆，请在结算页内查看</span>
+        </div>
+        <div class="right">-￥80.00</div>
+      </div>
+    </div>        
 
   </div>
 
@@ -103,6 +135,22 @@ import HeaderTop from '../common/home.vue'
 export default {
   components:{
     HeaderTop
+  },
+  data(){
+    return{
+        showAllDelete:false,//显示是否展示删除
+        showzhezhao:false//展示是否显示遮罩和金额明细面板
+    }
+  
+  },
+  methods:{
+    toggledelete(){
+      this.showAllDelete=!this.showAllDelete
+    },
+    togglezhezhao(){
+      this.showzhezhao= !this.showzhezhao
+      console.log('..')
+    }
   }
 }
 </script>
@@ -123,7 +171,7 @@ export default {
       border-radius 0 0 15px 15px
       .left
         position absolute
-        top 18px
+        top 12px
         left 24px
         & span:first-child
           font-size 18px
@@ -149,6 +197,22 @@ export default {
           position absolute
           top 0
           left -10px 
+    .delete
+      background-color #fff
+      display flex
+      padding 11px 22px 21px
+      width 100%
+      box-sizing border-box
+      border-top 1px solid #ccc
+      height 58px
+      position relative
+      border-radius 0 0 15px 15px
+      >span
+        position absolute
+        right 16px
+        top 17px 
+        font-size 15px
+
   .list_content
     margin-top 15px
     background-color #fff
@@ -159,8 +223,7 @@ export default {
     box-sizing border-box
     position relative
     margin-bottom 10px
-    .list_content_container
-      
+    .list_content_container 
       .chckbox
         display flex
         .icon-duigou
@@ -230,8 +293,7 @@ export default {
           display flex
           flex 1
           min-width 0
-          flex-flow column
-         
+          flex-flow column   
           & span:nth-of-type(1)
             font-size 12px
             white-space nowrap
@@ -324,7 +386,6 @@ export default {
       & span:nth-child(2)
         margin-left 208px 
   .tuijianlist
-
       width 100%
       // background-color #ccc
       border-radius 15px
@@ -346,8 +407,7 @@ export default {
           height 185px
           margin-bottom 15px
         .ziyin
-          margin-bottom 4px
-         
+          margin-bottom 4px    
           .ziyinbox
             display flex
             height 22px
@@ -393,11 +453,11 @@ export default {
     position fixed                 
     left 0
     right 0
-    bottom 57px
+    bottom 0px
     display flex
     box-shadow 0 3px 3px #ebeaec
     border-top 1px solid #ebeaec
-    border-bottom 2px solid black
+  
     height 56px
     .j_left
       flex 18.76%
@@ -446,21 +506,91 @@ export default {
     .j_right
       flex 36.15%
       height 43px
-      line-height 43px
+      position relative
+      right 5px
+      bottom 5px
+     
       background-color red
       border-radius 40px
       overflow hidden
       white-space nowrap
-      margin-top 6px
+      margin-top 12px
       span
+        position absolute
+        top 13px
+        left 11px
         font-size 18px
-        padding 9px 22px
+        // padding 0px 22px
         color #fff
         font-weight 700
         em
           font-weight 500
           font-size 18px
           font-weight 500
-
-
+  .shouchang
+    width 100%
+    background-color #fff
+    position fixed                 
+    left 0
+    right 0
+    bottom 0px
+    display flex
+    box-shadow 0 3px 3px #ebeaec
+    border-top 1px solid #ebeaec
+   
+    height 56px
+    .left
+      flex 18.76%
+      margin-left 15px
+      margin-top 10px
+      .icon-duigou
+        border-radius 13.5px
+        width 27px
+        height 27px
+        line-height 27px
+        text-align center
+        font-weight 700
+        background-color red
+        color #fff
+        font-size 16px
+        margin-right 1px
+      & span:last-child
+        font-size 15px 
+    .right
+      position absolute     
+      top 8px
+      right 15px
+      & span:first-child
+        line-height 27px
+        // width 100px
+        height 27px
+        text-align center
+        font-size 14px
+        border-radius 30px
+        padding 8px 16px
+        border 1px solid #ccc
+      & span:last-child
+        line-height 27px
+        // width 100px
+        height 27px
+        text-align center
+        font-size 14px
+        border-radius 30px
+        padding 8px 16px
+        border 1px solid #ccc
+  .zhezhao
+    position fixed
+    top 55px
+    right 0px
+    left 0px
+    bottom 56px
+    background-color rgba(0,0,0,.4)
+  .monnyshow
+    position fixed
+    bottom 56px
+    left 0
+    right 0
+    height 409px
+    background-color #fff
+    font-size 12px
 </style>

@@ -1,9 +1,9 @@
 <template>
 <div>
   <div class="nav">
-      <router-link to="/" class="back">
+      <div @click="$router.back()" class="back">
         <span class="iconfont icon-jiantou_zuo"></span>
-      </router-link>
+      </div>
       <span class="fu">{{title}}</span>
       <span class="iconfont icon-ellipsis"></span>
   </div>  

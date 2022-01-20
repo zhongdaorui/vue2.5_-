@@ -1,5 +1,5 @@
 <template>
-  <div class="warp">
+  <div class="warpppp">
     <div class="introduce">
       <img src="//m.360buyimg.com/mobilecms/s750x750_jfs/t1/95137/10/21798/151662/61e2f3e8Ea768a8f6/32bf7542df2b4ed4.jpg!q80.dpg.webp" alt="">
       <div class="middle">
@@ -46,7 +46,7 @@ export default {
 
 
 <style lang="stylus" scoped>
-.warp
+.warpppp
   height 466px
   background-color #fff
   width 100%

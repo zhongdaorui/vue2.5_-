@@ -43,7 +43,7 @@
           </span>
           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURUdwTIyMjCYmJiYmJi0tLY+PjyYmJidnOsIAAAAGdFJOUwDt6aYcSSEXj/YAAAA8SURBVCjPY2AYBTQBLEbKDhiCTmlpKggeq2AAiDJLS0tGcBkFBUActbS0JAY4F6sgVu1YLcLnpFFAFQAATwgLKVhjC9UAAAAASUVORK5CYII" alt="">
         </div>
-      </div>
+      </div> 
       <div class="content">
         <div class="pin">
           <div>
@@ -144,17 +144,50 @@
         </div>
       </div>
       <footer-button @join-cart="changeshowshopping" />
-      <cart-classify v-show="showshopping" @hiddenshop='changeshowshopping'/> 
+      <div class="warpppp" v-show="showshopping" >
+        <div class="introduce">
+          <img src="//m.360buyimg.com/mobilecms/s750x750_jfs/t1/95137/10/21798/151662/61e2f3e8Ea768a8f6/32bf7542df2b4ed4.jpg!q80.dpg.webp" alt="">
+          <div class="middle"  >
+            <span >￥<em>{{goods.price}}</em>.00</span>
+            <span>
+              <em>已选</em>
+              {{goods.size}}克(含工费70元)，1个
+            </span>
+          </div>
+          <div class="right"  @click="changeshowshopping"></div>
+        </div>
+        <div class="size">
+          <div class="sizeh3">尺码</div>
+          <div class="classify">
+            <div>1.67克(含工费70元)</div>
+            <div>1.72克(含工费70元)</div>
+          </div>
+        </div>
+        <div class="count">
+          <div>数量</div>
+          <div class="input_size">
+            <span @click="isaddcount(false)">-</span>
+            <div class="controlcount">{{goods.count}}</div>
+            <span @click="isaddcount(true)">+</span>
+          </div>
+        </div>
+        <div class="footer_button" @click="updatecartgoods">
+          确认
+        </div>
+      </div>
       <div class="zhezhao" v-show="showshopping" @click="changeshowshopping" ref="zhezhao"></div>
-    </div>
+    
     <Gallary :list="list" v-show="showgallary"  @close="changegallary">
-    </Gallary>  
+    </Gallary>
+  </div>   
   </div>
 </template>
 
 <script>
+import {mapActions,mapState} from 'vuex'
+import { Toast,MessageBox } from 'mint-ui';
 import swiper from '../common/swiper/Swiper.vue'
-import CartClassify from './components/cartclassify.vue'
+// import CartClassify from './components/cartclassify.vue'
 import FooterButton from './components/FooterButton.vue'
 import Gallary from '../common/gallary/Gallary.vue'
 export default {
@@ -167,10 +200,21 @@ export default {
       '//m.360buyimg.com/mobilecms/s750x750_jfs/t1/95137/10/21798/151662/61e2f3e8Ea768a8f6/32bf7542df2b4ed4.jpg!q80.dpg.webp',
       '//m.360buyimg.com/mobilecms/s843x843_jfs/t8677/324/1257355457/138314/3993660b/59b75894N0d83e8ec.jpg!q70.dpg.webp',
       ],
-      showgallary:false
+      showgallary:false,
+      goods:{
+        goodsname:'iphone13',
+        price:5560,
+        count:5,
+        size:'1.72',
+        
+      
+      },
+     
+      
     }
   },
   methods:{
+    
     goto(){
       this.$router.push('/')
     },
@@ -181,21 +225,62 @@ export default {
 			 		e.preventDefault();
 			 	},false);
 			},
-      changegallary(){
-       
-         this.showgallary = !this.showgallary
-    
-       
+      changegallary(){       
+         this.showgallary = !this.showgallary    
+      },
+      isaddcount(isadd){
+        if (isadd) {
+          console.log('.')
+          if (this.goods.count<10) {
+           this.goods.count++
+          }else{
+            Toast('最多买10件');
+            this.goods.count = 10
+          }
+          
+        }else{
+          if (this.goods.count>1) {
+            this.goods.count--
+          }else{
+             Toast('最少买1件');
+           this.goods.count = 1
+          } 
+        }
+          
+      },
+      updatecartgoods(){
+        this.$store.dispatch('updatecartgoods',this.goods)
+        this.showshopping = !this.showshopping
+        Toast({
+        message: '加入购物车',
+        position: 'middle',
+        duration: 2000
+      });
+      },
+      getsize(){
+        
       }
     },
     mounted(){
       
     },
-
-  
+    deactivated(){
+      this.showgallary=false
+     
+    },
+    // watch:{
+    //   size(value){
+    //     size = '1.72'
+    //     console.log(value)
+        
+    //   }
+    // },
+  computed:{
+    ...mapState(['cartgoods'])
+  },
   components:{
     FooterButton,
-     CartClassify,
+    //  CartClassify,
      Gallary,
      swiper 
   }
@@ -211,12 +296,18 @@ export default {
 
  
     .top
-    
+      z-index 0
+      position relative
+      height 440px
       .swiper_top
-        position relative
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 0
         
         width 100%
-     
+        z-index 1
           
         
         
@@ -265,8 +356,8 @@ export default {
           height 21px
           border-radius 30px
           background-color #a8a8a8
-          bottom 5px
-          right -7px
+          bottom 10px
+          right -8px
           line-height 21px
           text-align center
           font-size 12px
@@ -332,15 +423,19 @@ export default {
         display flex
         position relative
         padding-bottom 22px
-        border-bottom 2px solid #a8a8a8
+        border-bottom 1px solid #ccc
         margin-bottom 18px
         & span:nth-of-type(1)
           font-size 18px
           font-weight 700
           margin-right 13px
+          white-space nowrap
+         
         & span:nth-of-type(2)  
           font-size 16px
           margin-right 116px
+          white-space nowrap
+       
         
           em
             border 1px solid red
@@ -511,6 +606,116 @@ export default {
           font-size 12px
           display flex
           flex-flow column
+    .warpppp
+      height 466px
+      background-color #fff
+      width 100%
+      box-sizing border-box
+      padding 24px 15px 5px
+      border-radius 18px 18px 0 0 
+      position fixed
+      left 0
+      right 0
+      bottom 0
+      z-index 99
+      .introduce
+        display flex
+        position relative
+        >img
+          width 116px
+          height 116px
+          margin-right 15px
+        .middle
+          position relative
+          & span:first-child
+            position absolute
+            top 49px
+            left -3px
+            font-size 12px
+            color red   
+            em
+              font-size 25px
+              font-weight 700  
+          & span:last-child
+            font-size 12px
+            display block
+            position absolute
+            top 102px
+            left 0
+            white-space nowrap
+            em 
+              color #ccc
+              margin-right 16px
+        .right
+          position absolute
+          top 0
+          right 0px
+          &:before
+            content ''
+            display inline-block
+            width 27px
+            height 27px
+            background url('./components/img/删除.png') no-repeat left top/27px 27px      
+      .size
+        margin-top 36px
+        .sizeh3
+          font-size 15px
+          margin-bottom 15px
+          font-weight 700
+        .classify
+          display flex
+          & div:first-child,& div:last-child
+            font-size 14px
+            padding 10px 20px
+            border-radius 30px
+            border 1px solid red
+            margin-right 18px
+            background-color #f2f2f2
+      .count
+        margin-top 35px
+        
+        display flex
+        position relative
+        & div:first-child
+          font-size 15px
+          font-weight 700
+        & div:last-child  
+          position absolute
+          top -12px
+          right 20px
+          & span:first-child
+            font-size 33px
+            color black   
+            position absolute
+            left -17px
+            top -8px
+          .controlcount
+            width 40px
+            height 20px
+            line-height 20px
+            background-color #ccc
+            color black
+            font-size 12px
+            text-align center
+            color #262626
+            font-weight 700
+          & span:last-child  
+            ont-size 30px
+            color black     
+            position absolute
+            right  -22px
+            top -3px
+      .footer_button
+        position absolute
+        bottom 4px
+        left 17px
+        right 17px
+        background-color red
+        color #fff
+        font-size 15px
+        font-weight 700
+        padding 11px 181px
+        border-radius 20px      
     .zhezhao
       position fixed
       background-color rgba(0,0,0,.5) 
@@ -518,7 +723,7 @@ export default {
       left 0
       right 0
       bottom 0
-      z-index 99999999
+      z-index 9
 
 
 </style>

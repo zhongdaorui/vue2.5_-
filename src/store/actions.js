@@ -1,4 +1,9 @@
-import { RECEIVE_USER_INFO,RECEIVE_LOGIN_OUT } from "./mutation-type";
+import { RECEIVE_USER_INFO,
+RECEIVE_LOGIN_OUT,
+RECEIVE_GOODS,
+RECEIVE_CARTGOODS
+
+} from "./mutation-type";
 
 export default{
   getUserinfo({commit},userinfo){
@@ -6,5 +11,8 @@ export default{
   },
   loginout({commit}){
     commit(RECEIVE_LOGIN_OUT)
+  },
+  updatecartgoods({commit},goods){
+    commit(RECEIVE_CARTGOODS,{goods})
   }
 }

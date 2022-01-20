@@ -7,8 +7,13 @@
       <span>客服</span>
     </div>
     <div class="shopping">
-      <span>5</span>
-      <span>购物车</span>
+      <div class="contain" >  
+        <div class="outer" >
+          <span class="count">{{cartgoods.length}}</span>
+        </div>
+        <span class="gou" @click="$router.push('/shopcart')">购物车</span>
+      </div>
+    
     </div>
     <div class="addcar" @click.prevent="jion">加入购物车</div>
     <div class="nowshop" style="font-size:12px">立即购买</div>
@@ -17,11 +22,23 @@
 
 
 <script>
+import {mapState} from 'vuex'
 export default {
   methods:{
     jion(){
       this.$emit('join-cart')
     }
+  },
+  computed:{
+    ...mapState(['cartgoods']),
+  //   cartobj(){
+  //   let counter = 0;
+  //   for (let i = 0; i < this.cartgoods.length; i++) {
+  //      counter++;
+  //   }
+  //  return counter
+  //   }
+    
   }
 }
 </script>
@@ -56,6 +73,7 @@ export default {
       position absolute
       top 0
       left 5px
+    
     & span:first-child
       font-size 13px
       position absolute
@@ -99,27 +117,29 @@ export default {
       top 0
       left 5px
       z-index 2
-    & span:first-child
-      font-size 13px
-      position absolute
-      left 25px
-      top 0px 
-      z-index 9999
-      color red
-      border 1px solid red
-      width 12px
-      height 12px
-      border-radius 12px
-      font-size 12px
-      font-weight 700
-      text-align center
-      line-height 12px
-    & span:last-child      
-      font-size 13px
-      position absolute
-      left 0px
-      top 27px  
-      white-space nowrap
+    .contain
+      .outer
+        .count
+          font-size 13px
+          position absolute
+          left 25px
+          top 0px 
+          z-index 9999
+          color red
+          border 1px solid red
+          width 12px
+          height 12px
+          border-radius 12px
+          font-size 12px
+          font-weight 700
+          text-align center
+          line-height 12px
+      .gou    
+        font-size 13px
+        position absolute
+        left 0px
+        top 27px  
+        white-space nowrap
   .addcar
     background-color #f2270c
     padding 15px 20px 20px 20px

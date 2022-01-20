@@ -99,7 +99,7 @@ export default new Router({
       path:'/shopcart',
       component:shopcart,
       meta:{
-        showFooter:true
+        showFooter:false
       }
     }
 
