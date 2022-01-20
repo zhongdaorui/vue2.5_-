@@ -5,7 +5,7 @@
     <div class="bc">
     <div class="header_input">
         <span class="iconfont icon-caidan"></span>
-        <div class="input" @click="goto('/search')">
+        <div class="input" @click="$router.push('/search')">
           <div class="jd"></div>
           <span class="iconfont icon-fangdajing"></span>
           <span class="inner">dell台式机</span>

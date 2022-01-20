@@ -155,6 +155,8 @@ export default {
 <style lang="stylus" scoped>
 .warp
   background-color rgb(247 247 247)
+  overflow-x hidden
+  
   .personaldata
     background-color rgb(254 52 63)
     position relative
@@ -303,8 +305,9 @@ export default {
         margin-top 15px
         text-indent 0.5em
   .fff
+
     width 100%
-    height 1000px
+   
     .ding
       display flex
       margin-bottom 24px

@@ -105,6 +105,7 @@ export default {
 
 <style lang="stylus" scoped>
 .swiper-container
+   
     margin-bottom 50px
     .swiper-wrapper
       .swiper-slide

@@ -19,5 +19,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+div
+  overflow-x hidden
+  height 100%
 
+  
 </style>

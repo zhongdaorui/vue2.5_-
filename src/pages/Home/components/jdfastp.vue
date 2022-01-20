@@ -111,7 +111,8 @@ export default {
 .warp
   background-color #f6f6f6
   padding 0 10px
-  height 1000px
+  
+
   .contain
     background-color #fff
     width 100%

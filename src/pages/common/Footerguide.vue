@@ -1,5 +1,6 @@
 <template>
-  <div class="warp">
+<div class="out">
+   <div class="warp">
     <div class="guide_item" @click="goto('/')"  :class="{active:$route.path=='/'}">
       <span class="iconfont icon-jingdong"></span>
       <span class="wei">首页</span>
@@ -20,8 +21,11 @@
       <span class="iconfont icon-gerenyonghutouxiang2"></span>
       <span class="wei">我的</span>
      </router-link>
-
   </div>
+</div>
+  
+
+ 
 </template>
 
 <script>
@@ -40,33 +44,34 @@ export default {
 
 
 <style lang="stylus"   scoped>
-.warp
-  padding 11px 25px 8px 26px 
-  display flex
-  height 59px
-  box-sizing border-box
-  position fixed
-  z-index 100
-  left 0
-  right 0
-  bottom 0 
-  background-color #fff
-  .guide_item
-    margin-right 40px
+
+  .warp
+    padding 11px 25px 8px 26px 
     display flex
-    flex-flow column
-    align-items center
-    margin-right 60px
-    color #ccc
-    &.active
-      color red
-    .iconfont
-      font-size 20px
-    .wei
-      font-size 11px !important
-      white-space nowrap
-      padding 3px 0
-  & div:nth-child(5)
-    margin-right 0       
+    height 59px
+    box-sizing border-box
+    position fixed
+    bottom 0
+    left 0
+    right  0 
+   
+    background-color #fff
+    .guide_item  
+      margin-right 40px
+      display flex
+      flex-flow column
+      align-items center
+      margin-right 60px
+      color #ccc
+      &.active
+        color red
+      .iconfont
+        font-size 20px
+      .wei
+        font-size 11px !important
+        white-space nowrap
+        padding 3px 0
+    & div:nth-child(5)
+      margin-right 0       
 
 </style>

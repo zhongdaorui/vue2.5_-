@@ -67,112 +67,115 @@ export default {
 
 
 <style  lang="stylus"   scoped>
-nav
-  padding 7px 5px 7px 16px
-  width 100%
-  box-sizing border-box
-  height 53px
-  border-bottom 1px solid #a8a8a8
-  display flex
-  position fixed
-  top 0
-  left 0
-  right 0
-  z-index 100
-  background-color #fff
-  .icon-jiantou_zuo
-    font-size 30px
-    color #c8c8c8
-    margin-top 6px
-    margin-right 10px
-  .input
-    width 350px
-    line-height 39px
-    border-radius 20px
-    position relative
-    background-color #f6f6f6
-    margin-right 20px
-    .icon-fangdajing
-      position absolute
-      top 2px
-      left 20px
-      font-size 18px
+.warp
+  // overflow visible
+  // overflow-y visible
+  nav
+    padding 7px 5px 7px 16px
+    width 100%
+    box-sizing border-box
+    height 53px
+    border-bottom 1px solid #a8a8a8
+    display flex
+    position fixed
+    top 0
+    left 0
+    right 0
+    z-index 100
+    background-color #fff
+    .icon-jiantou_zuo
+      font-size 30px
       color #c8c8c8
-    .mei
-      font-size 14px
+      margin-top 6px
+      margin-right 10px
+    .input
+      width 350px
+      line-height 39px
+      border-radius 20px
+      position relative
+      background-color #f6f6f6
+      margin-right 20px
+      .icon-fangdajing
+        position absolute
+        top 2px
+        left 20px
+        font-size 18px
+        color #c8c8c8
+      .mei
+        font-size 14px
+        color #c8c8c8
+        margin-left 46px
+        line-height 35px
+    .icon-caidan
+      font-size 25px
+      margin-top 9px
       color #c8c8c8
-      margin-left 46px
-      line-height 35px
-  .icon-caidan
-    font-size 25px
-    margin-top 9px
-    color #c8c8c8
-.content
-  display flex
-  position absolute
-  top 48px
-  left 0
-  right 0
-  bottom 58px
-  overflow hidden
-  z-index 1
-  .left_warp
-    width 93px
-    background-color #f6f6f6
-    ul
-      display flex
-      flex-flow column
-      line-height 54px
-      font-size 18px
-      text-align center
-      li
-        height 60px
-  .right_warp
-    background-color #fff 
-    position relative
-    flex 1    
-    margin-top 61px
-    overflow hidden  
-    ul
-      display flex
-      flex-flow row wrap
-      margin-top 60px
-      margin-left 32px
-      li
+  .content
+    display flex
+    position absolute
+    top 48px
+    left 0
+    right 0
+    bottom 58px
+    overflow hidden
+    z-index 1
+    .left_warp
+      width 93px
+      background-color #f6f6f6
+      ul
         display flex
         flex-flow column
-        align-items center
-        margin-right 45px
-        img
-          width 70px
-          height 70px
-        span
-          font-size 13px
-          padding-top 6px  
-          padding-bottom 9px
-      li:nth-child(3n)
-        margin-right 0
-  .h3
-    position absolute
-    top 25px
-    left 102px
-    display flex 
-    width 100% 
-    .leftfen
-      font-size 17px
-      font-weight 600
-    .pai
+        line-height 54px
+        font-size 18px
+        text-align center
+        li
+          height 60px
+    .right_warp
+      background-color #fff 
+      position relative
+      flex 1    
+      margin-top 61px
+      overflow hidden  
+      ul
+        display flex
+        flex-flow row wrap
+        margin-top 60px
+        margin-left 32px
+        li
+          display flex
+          flex-flow column
+          align-items center
+          margin-right 45px
+          img
+            width 70px
+            height 70px
+          span
+            font-size 13px
+            padding-top 6px  
+            padding-bottom 9px
+        li:nth-child(3n)
+          margin-right 0
+    .h3
       position absolute
-      right 130px
-      top 0px
-      display flex
-      .icon-erweima
-        font-size 14px
-        color red
-      .hang
-        font-size 12px
-      .icon-jinrujiantou1
-        font-size 20px
-        font-weight 700
-        margin-left -10px  
+      top 25px
+      left 102px
+      display flex 
+      width 100% 
+      .leftfen
+        font-size 17px
+        font-weight 600
+      .pai
+        position absolute
+        right 130px
+        top 0px
+        display flex
+        .icon-erweima
+          font-size 14px
+          color red
+        .hang
+          font-size 12px
+        .icon-jinrujiantou1
+          font-size 20px
+          font-weight 700
+          margin-left -10px  
 </style>

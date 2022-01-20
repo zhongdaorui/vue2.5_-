@@ -1,12 +1,13 @@
 <template>
-  <div class="warp">
-      <div class="top">
-        <div class="swiper_top">
-          <img src="//m.360buyimg.com/mobilecms/s750x750_jfs/t1/212226/14/10322/235110/61d5d0a4E5d4cc919/571b8b61966da6c0.jpg!q80.dpg.webp" alt="">
+  <div class="warp" >
+    <div class="inner" >
+      <div class="top" >
+        <div class="swiper_top" @click='changegallary'>
+          <swiper class="swiper" :list="list" />
           <span class="iconfont icon-jiantou_zuo" @click="goto"></span>
           <span class="iconfont icon-caidan"></span>
           <span>00'30''</span>
-          <span>1/10</span>
+          <span>5</span>
         </div>
         <div class="price_title">
           <div>
@@ -142,21 +143,61 @@
           </div> -->
         </div>
       </div>
-
-
-    
-    
-   
-    
+      <footer-button @join-cart="changeshowshopping" />
+      <cart-classify v-show="showshopping" @hiddenshop='changeshowshopping'/> 
+      <div class="zhezhao" v-show="showshopping" @click="changeshowshopping" ref="zhezhao"></div>
+    </div>
+    <Gallary :list="list" v-show="showgallary"  @close="changegallary">
+    </Gallary>  
   </div>
 </template>
 
 <script>
+import swiper from '../common/swiper/Swiper.vue'
+import CartClassify from './components/cartclassify.vue'
+import FooterButton from './components/FooterButton.vue'
+import Gallary from '../common/gallary/Gallary.vue'
 export default {
+  data(){
+    return{
+      showshopping:false,
+      list:['//m.360buyimg.com/mobilecms/s843x843_jfs/t8707/289/1248517585/292456/42a1566b/59b758a7N52f1b170.jpg!q70.dpg.webp',
+      '//m.360buyimg.com/mobilecms/s843x843_jfs/t8707/289/1248517585/292456/42a1566b/59b758a7N52f1b170.jpg!q70.dpg.webp',
+      '//m.360buyimg.com/mobilecms/s843x843_jfs/t8677/324/1257355457/138314/3993660b/59b75894N0d83e8ec.jpg!q70.dpg.webp',
+      '//m.360buyimg.com/mobilecms/s750x750_jfs/t1/95137/10/21798/151662/61e2f3e8Ea768a8f6/32bf7542df2b4ed4.jpg!q80.dpg.webp',
+      '//m.360buyimg.com/mobilecms/s843x843_jfs/t8677/324/1257355457/138314/3993660b/59b75894N0d83e8ec.jpg!q70.dpg.webp',
+      ],
+      showgallary:false
+    }
+  },
   methods:{
     goto(){
       this.$router.push('/')
-    }
+    },
+    changeshowshopping(){
+        this.showshopping = !this.showshopping
+        this.$refs.zhezhao.addEventListener("touchstart",function(e){
+			 		// e.stopPropagation();
+			 		e.preventDefault();
+			 	},false);
+			},
+      changegallary(){
+       
+         this.showgallary = !this.showgallary
+    
+       
+      }
+    },
+    mounted(){
+      
+    },
+
+  
+  components:{
+    FooterButton,
+     CartClassify,
+     Gallary,
+     swiper 
   }
 }
 </script>
@@ -164,306 +205,320 @@ export default {
 <style lang="stylus" scoped>
 .warp
   background-color #f6f6f6
-  .top
-  
-    .swiper_top
-      position relative
-      width 100%
-      
-      img
-        width 100%
-        // position absolute
-        // top 0
-        // left 0
-        // right 0
-      & span:nth-of-type(1)  
-        position absolute
-        left 3px
-        top 6px
-        font-size 30px
-        color #fff
-        width 40px
-        height 40px
-        line-height 40px
-        text-align center
-        background-color #a8a8a8
-        border-radius 40px
-      & span:nth-of-type(2)  
-        position absolute
-        right  8px
-        top 6px
-        font-size 30px
-        color #fff
-        width 40px
-        height 40px
-        line-height 40px
-        text-align center
-        background-color #a8a8a8
-        border-radius 40px
-      & span:nth-of-type(3)
-        position absolute
-        left 186px
-        top 404px
-        width 110px
-        height 35px
-        background url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAAA8CAMAAADbqzFgAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABOUExURUdwTJqamvDw8M/Pz/1vav39/f6Qi////wgICAAAAPv7++Tk5P/Lyv+8u/f39//v7/T09P5OUP1fU/9FTv1XUvxmVf////6sqv7s6/7My/JlC+UAAAARdFJOUwAshEv5xezMEwi4Z9neoNCW4Fs5AwAAAw1JREFUaN7VmtuWqyAMhlulFHV6QEDt+7/oBuWQIN179g3R2MtZa771/0kIh8ulHF3Xieph/+nlP8IStkPz7PvbvVrc+v7ZDK1l/T3juyJfRvv+FWknrg0Zoydtrv8CtZD3A4QF/auUw+1+iLgN3wXtrs/7YeJ57b5R9uDPfjhnzBjGOP8h4ezLnKJNhj+4JXQx2jCj4Q8K49tCgoohQXpGS+m+NRgF6LDj7NrodoSMjKMetWYE3rddnpfBcW6M2Ymp14/X9x3nZ6yeFzclLa2YLviLto6E70QvVtLSUa6gklXnfIp9+UBKlJdeTQrOVEYxMZHjETRCWkzJ6dJTNPvqCVpCMaXFrM/ZiCCm70SFvNRATLl91fuSlzOImZUPKp4gpv0xIjnFlpmPEiXW0pkuZe316Cbg+lOoco3KZ4OUciRZi8Q7F3Ms1I8MnhPI+RbJc55Tsnk2uHx8KE7gesnzFXSZpmUOUgItlZQErncD7kZxcptcLAwWuVezek8aLGaDPI8L+YY5TR8WxPSQqr7rTRemDp4XecCcpjmzXKnardPOH6KHqZlaUcKcFi6T4YoAs8eYqRNBNZ3zY5TSUipJgLn1o5iXxi+RCHOao5jrr35HSph4WseYn2C4E1MpAsyS6TozfWEpMYlMj5h42ICYs0aUJCUUGhLeRmqTDGdb9YTMJGlIob3nUxHLu5EKWiqK9h4WyxFMRY7TQL+h4zYoFks/eph8wlyc3wa1dQ9KMXrEQS7fRvLPmpSwrRN5vo7vYSyOO584vGmtQV4mUpKxOA6crq0DNSUMKCaJ52nLNqZ9D9igSZiVJGLeBN4Ao2MYDaWElFQb4HicAPdnaVrfZiI6McNxQjqc0aUNGk5MRXY4A466wAZNlxOzuuXgJDYdHOaJmWtJeXAIj2GzXWSmpSQ9hoWH2pmYxFr2+eF7vCLQoMaxmORXBPjCRRbFPMKFS3Z9tYfUx7i+yi8DNaqf41wG7q9WGXM1z9ixrlbPclF9lmv/szyiOM2TlFXREzzwOc1zKcLHZ+Lr47M/c6RItxWG3+oAAAAASUVORK5CYII=")
-        background-repeat no-repeat
-        font-size 12px
-        background-size 100% 100%
-        line-height 35px
-        text-align center
-      & span:nth-of-type(4)
-        position absolute
-        width 74px
-        height 21px
-        border-radius 30px
-        background-color #a8a8a8
-        top 422px
-        left 407px
-        line-height 21px
-        text-align center
-        font-size 12px
-    .price_title
-      border-radius 0 0 30px 30px
-      padding 16px 20px 17px
-      background-color #fff
-      & div:nth-of-type(1)    
-        display flex
-        position relative
-        margin-bottom 28px
-        .left
-          color red
-          font-size 13px
-          em
-            font-size 34px
-            font-weight 700
-        .right
-          position absolute
-          right 0
-          top 0
-          display flex
-          div
-            display flex
-            flex-flow column
-            img
-              width 25px
-              height 25px
-            span
-              font-size 12px
-              width 50px  
-          & div:nth-child(1)
-            margin-right 5px
-            span
-              margin-left -8px
-              margin-top 6px
-      & div:nth-of-type(2)  
-        font-size 20px
-        font-weight 700
-        line-height 28px
-        margin-bottom 27px
-      & div:nth-of-type(3)
-        font-size 14px
-        white-space nowrap
-        text-overflow ellipsis
-        overflow hidden
-        line-height 18px
-  // .bai
-  .fenge
-    height 14px
-    background-color #f6f6f6
-    width 100%
-  .bai
-    width 100%
-    border-radius 20px
-    background-color #fff
-    padding 32px 20px 5px
-    margin-bottom 11px
-    box-sizing border-box
-    
-    div
-      display flex
-      position relative
-      padding-bottom 22px
-      border-bottom 2px solid #a8a8a8
-      margin-bottom 18px
-      & span:nth-of-type(1)
-        font-size 18px
-        font-weight 700
-        margin-right 13px
-      & span:nth-of-type(2)  
-        font-size 16px
-        margin-right 116px
-       
-        em
-          border 1px solid red
-          color red
-          font-size 13px
-      img
-     
-        width 35px
-        height 20px
-  .content
-    padding 18px 14px 0px
-    box-sizing border-box
-    background-color #fff
-    margin-bottom 12px
-    .pin     
-      & div:nth-of-type(1)
-        display flex
-        position relative
-        margin-bottom 13px
-        .shu
-          width 2px
-          height 20px
-          background-color red
-        & span:nth-of-type(1)  
-          font-size 20px
-          margin 0 10px 0 5px
-          font-weight 700
-        & span:nth-of-type(2)    
-          font-size 12px
-          font-weight 700
-          margin-top 3px
-        & div:nth-of-type(2)
-          position absolute
-          top 0
-          right 0
-          font-size 12px 
-          .hao
-            font-size 14px
-            margin-right -1px
-            font-weight 700
-          .icon-jiantouzuo
-            font-size 20px  
-            font-weight 700
-      & div:nth-of-type(2)
-        margin-bottom 22px
-        ul
-          display flex
-          flex-wrap wrap
-          li
-            width 104px
-            height 39px
-            line-height 39px
-            text-align center
-            margin-right 25px
-            background-color pink 
-            font-size 16px 
-            margin-bottom 10px
-            border-radius 20px 
-      & div:nth-of-type(3)
-        & div:nth-of-type(1)
-          position relative        
-          ul
-            li
-              display flex
-            
-              .left
-                img
-                  width 20px
-                  height 26px
-                  margin-right 10px 
-                  vertical-align middle
-                  margin-top -3px
-                .u
-                  font-size 12px
-                .icon-shoucang
-                  font-size 13px
-                  color orange
-                  margin-right 2px 
-              .right
-                position absolute
-                right 0
-                top 0
-                font-size 12px
-                color #c8c8c8  
-        & div:nth-of-type(2)
-          font-size 16px
-          margin-bottom 25px
-        & div:nth-of-type(3)
-          ul
-            display flex
-            li
-              margin-right 8px
-              overflow hidden
-              img
-                width 101px
-                height 96px
-                border-radius 6px
-       
-      & div:nth-of-type(4)
-        margin-top 10px
-        width 128px
-        line-height 32px
-        font-size 14px
-        border 1px solid #f6f6f6
-        text-align center
-        margin-left 170px
-        border-radius 10px
-        margin-bottom 15px
-      & div:nth-of-type(6)
-        height 1px
-        width 100%
-        background-color #f6f6f6
-      // & div:nth-of-type(6)
-      & div:nth-of-type(5)
-        position relative
-        .right
-          position absolute
-          right 0
-          top 0
-          font-size 12px
-  .fuxiangshop
-    padding 26px 0px 21px 30px
-    width 100%
-    box-sizing border-box
-    background-color #fff
-    position relative
-    height 1000px
+  overflow-x hidden
+  height 100%
+  .inner
+
+ 
     .top
-      display flex
-      margin-bottom 29px
-      img
-        width 40px
-        height 40px
-        margin-right 15px
-      .fux
-        font-size 17px
-        p
-          line-height 20px
-        .icon-shoucang
-          font-size 8px !important
-          color red
-    .two
-      display flex
-      .left
-        border-right 1px solid #f6f6f6
-        padding 5px 50px
-        box-sizing border-box
-        font-size 13px
-        display flex
-        flex-flow column 
-        text-align center 
-        span:nth-child(1)
-          line-height 26px
-      .midiee
-        position absolute
-        top 105px
-        left 239px
-        display flex
-        flex-flow column
-        font-size 12px
-        line-height 19px
-        .four
-          text-indent 2em
-      .right
-        position absolute
-        left 353px
-        top 105px
-        font-size 12px
-        display flex
-        flex-flow column
+    
+      .swiper_top
+        position relative
         
+        width 100%
+     
+          
+        
+        
+        & span:nth-of-type(1)  
+          position absolute
+          left 3px
+          top 6px
+          font-size 30px
+          color #fff
+          width 40px
+          height 40px
+          line-height 40px
+          text-align center
+          background-color #a8a8a8
+          border-radius 40px
+          z-index 2
+        & span:nth-of-type(2)  
+          position absolute
+          right  8px
+          top 6px
+          font-size 30px
+          color #fff
+          width 40px
+          height 40px
+          line-height 40px
+          text-align center
+          background-color #a8a8a8
+          border-radius 40px
+           z-index 3
+        & span:nth-of-type(3)
+          position absolute
+          left 186px
+          top 404px
+          width 110px
+          height 35px
+          background url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAAA8CAMAAADbqzFgAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABOUExURUdwTJqamvDw8M/Pz/1vav39/f6Qi////wgICAAAAPv7++Tk5P/Lyv+8u/f39//v7/T09P5OUP1fU/9FTv1XUvxmVf////6sqv7s6/7My/JlC+UAAAARdFJOUwAshEv5xezMEwi4Z9neoNCW4Fs5AwAAAw1JREFUaN7VmtuWqyAMhlulFHV6QEDt+7/oBuWQIN179g3R2MtZa771/0kIh8ulHF3Xieph/+nlP8IStkPz7PvbvVrc+v7ZDK1l/T3juyJfRvv+FWknrg0Zoydtrv8CtZD3A4QF/auUw+1+iLgN3wXtrs/7YeJ57b5R9uDPfjhnzBjGOP8h4ezLnKJNhj+4JXQx2jCj4Q8K49tCgoohQXpGS+m+NRgF6LDj7NrodoSMjKMetWYE3rddnpfBcW6M2Ymp14/X9x3nZ6yeFzclLa2YLviLto6E70QvVtLSUa6gklXnfIp9+UBKlJdeTQrOVEYxMZHjETRCWkzJ6dJTNPvqCVpCMaXFrM/ZiCCm70SFvNRATLl91fuSlzOImZUPKp4gpv0xIjnFlpmPEiXW0pkuZe316Cbg+lOoco3KZ4OUciRZi8Q7F3Ms1I8MnhPI+RbJc55Tsnk2uHx8KE7gesnzFXSZpmUOUgItlZQErncD7kZxcptcLAwWuVezek8aLGaDPI8L+YY5TR8WxPSQqr7rTRemDp4XecCcpjmzXKnardPOH6KHqZlaUcKcFi6T4YoAs8eYqRNBNZ3zY5TSUipJgLn1o5iXxi+RCHOao5jrr35HSph4WseYn2C4E1MpAsyS6TozfWEpMYlMj5h42ICYs0aUJCUUGhLeRmqTDGdb9YTMJGlIob3nUxHLu5EKWiqK9h4WyxFMRY7TQL+h4zYoFks/eph8wlyc3wa1dQ9KMXrEQS7fRvLPmpSwrRN5vo7vYSyOO584vGmtQV4mUpKxOA6crq0DNSUMKCaJ52nLNqZ9D9igSZiVJGLeBN4Ao2MYDaWElFQb4HicAPdnaVrfZiI6McNxQjqc0aUNGk5MRXY4A466wAZNlxOzuuXgJDYdHOaJmWtJeXAIj2GzXWSmpSQ9hoWH2pmYxFr2+eF7vCLQoMaxmORXBPjCRRbFPMKFS3Z9tYfUx7i+yi8DNaqf41wG7q9WGXM1z9ixrlbPclF9lmv/szyiOM2TlFXREzzwOc1zKcLHZ+Lr47M/c6RItxWG3+oAAAAASUVORK5CYII=")
+          background-repeat no-repeat
+          font-size 12px
+          background-size 100% 100%
+          line-height 35px
+          text-align center
+          z-index 4
+        & span:nth-of-type(4)
+          position absolute
+          width 74px
+          height 21px
+          border-radius 30px
+          background-color #a8a8a8
+          bottom 5px
+          right -7px
+          line-height 21px
+          text-align center
+          font-size 12px
+          z-index 5
+      .price_title
+        border-radius 0 0 30px 30px
+        padding 16px 20px 17px
+        background-color #fff
+        & div:nth-of-type(1)    
+          display flex
+          position relative
+          margin-bottom 28px
+          .left
+            color red
+            font-size 13px
+            em
+              font-size 34px
+              font-weight 700
+          .right
+            position absolute
+            right 0
+            top 0
+            display flex
+            div
+              display flex
+              flex-flow column
+              img
+                width 25px
+                height 25px
+              span
+                font-size 12px
+                width 50px  
+            & div:nth-child(1)
+              margin-right 5px
+              span
+                margin-left -8px
+                margin-top 6px
+        & div:nth-of-type(2)  
+          font-size 20px
+          font-weight 700
+          line-height 28px
+          margin-bottom 27px
+        & div:nth-of-type(3)
+          font-size 14px
+          white-space nowrap
+          text-overflow ellipsis
+          overflow hidden
+          line-height 18px
+    // .bai
+    .fenge
+      height 14px
+      background-color #f6f6f6
+      width 100%
+    .bai
+      width 100%
+      border-radius 20px
+      background-color #fff
+      padding 32px 20px 5px
+      margin-bottom 11px
+      box-sizing border-box
+      
+      div
+        display flex
+        position relative
+        padding-bottom 22px
+        border-bottom 2px solid #a8a8a8
+        margin-bottom 18px
+        & span:nth-of-type(1)
+          font-size 18px
+          font-weight 700
+          margin-right 13px
+        & span:nth-of-type(2)  
+          font-size 16px
+          margin-right 116px
+        
+          em
+            border 1px solid red
+            color red
+            font-size 13px
+        img
+      
+          width 35px
+          height 20px
+    .content
+      padding 18px 14px 0px
+      box-sizing border-box
+      background-color #fff
+      margin-bottom 12px
+      .pin     
+        & div:nth-of-type(1)
+          display flex
+          position relative
+          margin-bottom 13px
+          .shu
+            width 2px
+            height 20px
+            background-color red
+          & span:nth-of-type(1)  
+            font-size 20px
+            margin 0 10px 0 5px
+            font-weight 700
+          & span:nth-of-type(2)    
+            font-size 12px
+            font-weight 700
+            margin-top 3px
+          & div:nth-of-type(2)
+            position absolute
+            top 0
+            right 0
+            font-size 12px 
+            .hao
+              font-size 14px
+              margin-right -1px
+              font-weight 700
+            .icon-jiantouzuo
+              font-size 20px  
+              font-weight 700
+        & div:nth-of-type(2)
+          margin-bottom 22px
+          ul
+            display flex
+            flex-wrap wrap
+            li
+              width 104px
+              height 39px
+              line-height 39px
+              text-align center
+              margin-right 25px
+              background-color pink 
+              font-size 16px 
+              margin-bottom 10px
+              border-radius 20px 
+        & div:nth-of-type(3)
+          & div:nth-of-type(1)
+            position relative        
+            ul
+              li
+                display flex
+              
+                .left
+                  img
+                    width 20px
+                    height 26px
+                    margin-right 10px 
+                    vertical-align middle
+                    margin-top -3px
+                  .u
+                    font-size 12px
+                  .icon-shoucang
+                    font-size 13px
+                    color orange
+                    margin-right 2px 
+                .right
+                  position absolute
+                  right 0
+                  top 0
+                  font-size 12px
+                  color #c8c8c8  
+          & div:nth-of-type(2)
+            font-size 16px
+            margin-bottom 25px
+          & div:nth-of-type(3)
+            ul
+              display flex
+              li
+                margin-right 8px
+                overflow hidden
+                img
+                  width 101px
+                  height 96px
+                  border-radius 6px
+        
+        & div:nth-of-type(4)
+          margin-top 10px
+          width 128px
+          line-height 32px
+          font-size 14px
+          border 1px solid #f6f6f6
+          text-align center
+          margin-left 170px
+          border-radius 10px
+          margin-bottom 15px
+        & div:nth-of-type(6)
+          height 1px
+          width 100%
+          background-color #f6f6f6
+        // & div:nth-of-type(6)
+        & div:nth-of-type(5)
+          position relative
+          .right
+            position absolute
+            right 0
+            top 0
+            font-size 12px
+    .fuxiangshop
+      padding 26px 0px 21px 30px
+      width 100%
+      box-sizing border-box
+      background-color #fff
+      position relative
+      height 1000px
+      .top
+        display flex
+        margin-bottom 29px
+        img
+          width 40px
+          height 40px
+          margin-right 15px
+        .fux
+          font-size 17px
+          p
+            line-height 20px
+          .icon-shoucang
+            font-size 8px !important
+            color red
+      .two
+        display flex
+        .left
+          border-right 1px solid #f6f6f6
+          padding 5px 50px
+          box-sizing border-box
+          font-size 13px
+          display flex
+          flex-flow column 
+          text-align center 
+          span:nth-child(1)
+            line-height 26px
+        .midiee
+          position absolute
+          top 105px
+          left 219px
+          display flex
+          flex-flow column
+          font-size 12px
+          line-height 19px
+          .four
+            text-indent 2em
+        .right
+          position absolute
+          left 313px
+          top 105px
+          font-size 12px
+          display flex
+          flex-flow column
+    .zhezhao
+      position fixed
+      background-color rgba(0,0,0,.5) 
+      top 0      
+      left 0
+      right 0
+      bottom 0
+      z-index 99999999
 
 
 </style>

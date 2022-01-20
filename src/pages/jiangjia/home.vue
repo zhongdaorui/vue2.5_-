@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="warp">
      <div class="guan_swiper">
         <router-link to="/" class="link">
           <span class="iconfont icon-jiantou_zuo"></span>
@@ -84,129 +84,133 @@ export default {
 
 
 <style lang="stylus"  scoped>
-.guan_swiper
-  .link
-    span
-      font-size 30px
-      position absolute
-      top 15px
-      left 15px
-      width 30px
-      height 30px
-      border-radius 30px
-      background-color #f6f6f6
-  img
-    width 100%
-.content
-  background-color #f6f6f6 
-  padding 30px 18px 0
-  box-sizing border-box
-  .tabs   
-    margin-bottom 20px
-    .pad
-      display flex     
-      overflow-x: scroll;
-      overflow-y: hidden;
-      padding-bottom: 25px  
-      li
-        margin-right 29px
-        white-space: nowrap;
-        font-size 20px
-        font-weight 700
-  .shangp
-    display flex
-    margin-bottom 15px
-    .contain
-      display flex
+.warp
+  overflow-x hidden
+  height 100%
+  .guan_swiper
+    
+    .link
+      span
+        font-size 30px
+        position absolute
+        top 15px
+        left 15px
+        width 30px
+        height 30px
+        border-radius 30px
+        background-color #f6f6f6
+    img
+      width 100%
+  .content
+    background-color #f6f6f6 
+    padding 30px 18px 0
+    box-sizing border-box
+    .tabs   
       margin-bottom 20px
-      .left
-        width 163px
-        height 163px
-        background-color #fff
-        margin-right 18px
-        img
-          width 160px
-          height 160px
-      .right
-        width 100%
-        margin-top -9px
-        .first
-          width 100%
-          & span:nth-of-type(1)    
-            font-size 18px
-            color red
-          & span:nth-of-type(2)    
-            width 2px
-            height 20px
-            background-color black
-            margin 0 5px
-            margin-top 6px
-            display inline-block
-          & span:nth-of-type(3) 
-            font-size 18px
-          & span:nth-of-type(4)   
-            white-space nowrap
-            overflow hidden 
-            text-overflow ellipsis
-            font-size 18px
-            width 243px
-            display inline-block
-            margin-top -9px
-        .cla
-          width 62px
-          height 17px
-          background-color pink
-          border-radius 10px
-          padding 0 4px
-          font-size 12px
-          margin 9px 0
-        .yi
-          width 95px
-          height 16px
-          background-color orange
-          padding 1px 4px
-          font-size 11px
-          margin-bottom 7px
-          border-radius 10px 
-          box-sizing border-box
-          white-space nowrap
-        .bu
-          width 227px
-          height 44px
-          position relative
+      .pad
+        display flex     
+        overflow-x: scroll;
+        overflow-y: hidden;
+        padding-bottom: 25px  
+        li
+          margin-right 29px
+          white-space: nowrap;
+          font-size 20px
+          font-weight 700
+    .shangp
+      display flex
+      margin-bottom 15px
+      .contain
+        display flex
+        margin-bottom 20px
+        .left
+          width 163px
+          height 163px
+          background-color #fff
+          margin-right 18px
           img
-            width 227px
-            height 46px
-            position absolute
-            left 0
-            top 0
-            right 0
-            bottom 0
-          .qi
-            position absolute
-            left 20px
-            top 5px
-            font-size 18px
-            color #fff
-            font-weight 700
-          .hou
-            position absolute
-            top 28px
-            left 23px
-            font-size 15px
-            color #fff  
-          .qii
-            position absolute
-            left  140px
-            top 10px
-            font-size 17px 
-          .buu
-            position absolute
-            left 99px
-            top 28px
+            width 160px
+            height 160px
+        .right
+          width 100%
+          margin-top -9px
+          .first
+            width 100%
+            & span:nth-of-type(1)    
+              font-size 18px
+              color red
+            & span:nth-of-type(2)    
+              width 2px
+              height 20px
+              background-color black
+              margin 0 5px
+              margin-top 6px
+              display inline-block
+            & span:nth-of-type(3) 
+              font-size 18px
+            & span:nth-of-type(4)   
+              white-space nowrap
+              overflow hidden 
+              text-overflow ellipsis
+              font-size 18px
+              width 243px
+              display inline-block
+              margin-top -9px
+          .cla
+            width 62px
+            height 17px
+            background-color pink
+            border-radius 10px
+            padding 0 4px
             font-size 12px
-  .tab-item
-    display block
-  .none
-    display none               
+            margin 9px 0
+          .yi
+            width 95px
+            height 16px
+            background-color orange
+            padding 1px 4px
+            font-size 11px
+            margin-bottom 7px
+            border-radius 10px 
+            box-sizing border-box
+            white-space nowrap
+          .bu
+            width 227px
+            height 44px
+            position relative
+            img
+              width 227px
+              height 46px
+              position absolute
+              left 0
+              top 0
+              right 0
+              bottom 0
+            .qi
+              position absolute
+              left 20px
+              top 5px
+              font-size 18px
+              color #fff
+              font-weight 700
+            .hou
+              position absolute
+              top 28px
+              left 23px
+              font-size 15px
+              color #fff  
+            .qii
+              position absolute
+              left  140px
+              top 10px
+              font-size 17px 
+            .buu
+              position absolute
+              left 99px
+              top 28px
+              font-size 12px
+    .tab-item
+      display block
+    .none
+      display none               
 </style>

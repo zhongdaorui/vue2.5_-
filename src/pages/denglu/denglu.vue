@@ -101,8 +101,8 @@ export default {
           MessageBox.alert('手机号码不正确').then(action => {
                 });
                 return
-        }else if (!/^\d{6}$/.test( captch)) {
-             MessageBox.alert('验证必须是6位数字').then(action => {
+        }else if (!/^\d{4}$/.test( captch)) {
+             MessageBox.alert('验证必须是4位数字').then(action => {
                 });
                 return
         }
