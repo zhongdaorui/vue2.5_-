@@ -206,6 +206,8 @@ export default {
         price:5560,
         count:5,
         size:'1.72',
+        imgurl:'',
+        huoodng:''
         
       
       },

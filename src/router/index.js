@@ -11,6 +11,8 @@ import fenlei from '../pages/fenlei/home.vue'
 import xiajiang from '../pages/jiangjia/home.vue'
 import personal from '../pages/personal/home.vue'
 import shopcart from '../pages/shopcart/home.vue'
+import usersetting from '../pages/usersetting/home.vue'
+import addressmanage from '../pages/usersetting/addressmanage/addressmanage.vue'
 
 
 Vue.use(Router)
@@ -98,6 +100,20 @@ export default new Router({
     {
       path:'/shopcart',
       component:shopcart,
+      meta:{
+        showFooter:false
+      }
+    },
+    {
+      path:'/usersetting',
+      component: usersetting,
+      meta:{
+        showFooter:false
+      }
+    },
+    {
+      path:'/addressmanage',
+      component:addressmanage,
       meta:{
         showFooter:false
       }

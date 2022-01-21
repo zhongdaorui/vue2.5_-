@@ -1,35 +1,5 @@
 <template>
-  <div class="warpppp">
-    <div class="introduce">
-      <img src="//m.360buyimg.com/mobilecms/s750x750_jfs/t1/95137/10/21798/151662/61e2f3e8Ea768a8f6/32bf7542df2b4ed4.jpg!q80.dpg.webp" alt="">
-      <div class="middle">
-        <span >￥<em>874</em>.00</span>
-        <span>
-          <em>已选</em>
-           1.67克(含工费70元)，1个
-        </span>
-      </div>
-      <div class="right" @click="hiddenshop"></div>
-    </div>
-    <div class="size">
-      <div class="sizeh3">尺码</div>
-      <div class="classify">
-        <div>1.67克(含工费70元)</div>
-        <div>1.67克(含工费70元)</div>
-      </div>
-    </div>
-    <div class="count">
-      <div>数量</div>
-      <div class="input_size">
-        <span>-</span>
-        <input type="text"placeholder="5">
-        <span>+</span>
-      </div>
-    </div>
-    <div class="footer_button">
-      确认
-    </div>
-  </div>
+  
 </template>
 
 

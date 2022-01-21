@@ -14,7 +14,7 @@
             <span>小白守约400分</span>
           </div>
         </div>
-        <img src="https://img12.360buyimg.com/img/s40x40_jfs/t1/125926/3/7446/2181/5f15510bE3f46d483/4f25fadf9ebe91d3.png" alt="" class="button_right">
+        <img @click="$router.push('/usersetting')" src="https://img12.360buyimg.com/img/s40x40_jfs/t1/125926/3/7446/2181/5f15510bE3f46d483/4f25fadf9ebe91d3.png" alt="" class="button_right">
       </div>
       <div class="middle_data">
         <div class="sp">

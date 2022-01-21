@@ -103,28 +103,30 @@
         <span>删除</span>
       </div>
     </div>
-    <div class="zhezhao" v-show="showzhezhao" ></div>         
-    <div class="monnyshow" v-show="true">
-      <div class="h3">
-        <h3>金额明细</h3>
-        <span class="tuichu"></span>
-      </div>
-      <div class="allmonny">
-        <span>商品总额</span>
-        <span>￥874.00</span>
-      </div>
-      <div class="allmonny">
-      <span>促销</span>
-      <span>-￥87.00</span>
-      </div>
-      <div class="youhui">
-        <div class="left">
-          <p>共优惠</p>
-          <span>以上优惠不包含红包和京豆，请在结算页内查看</span>
+    <div class="zhezhao" v-show="showzhezhao" @click="togglezhezhao"></div> 
+    <div class="monnyshow" v-show="showzhezhao"  :class="showzhezhao?'shanghua':'xiahua'">
+        <div class="h3">
+          <h3>金额明细</h3>
+          <span class="tuichu" @click="togglezhezhao" ></span>
+        </div>  
+        <div class="allmonnya">
+          <span>商品总额</span>
+          <span>￥874.00</span>
         </div>
-        <div class="right">-￥80.00</div>
-      </div>
-    </div>        
+        <div class="allmonnyb">
+          <span>促销</span>
+          <span>-￥87.00</span>
+        </div>    
+        <div class="youhui">
+          <div class="left">
+            <p>共优惠</p>
+            <span>以上优惠不包含红包和京豆，请在结算页内查看</span>
+          </div>
+          <div class="right">-￥80.00</div>
+        </div>
+    </div>   
+           
+       
 
   </div>
 
@@ -139,7 +141,9 @@ export default {
   data(){
     return{
         showAllDelete:false,//显示是否展示删除
-        showzhezhao:false//展示是否显示遮罩和金额明细面板
+        showzhezhao:false,//展示是否显示遮罩和金额明细面板
+       
+
     }
   
   },
@@ -149,7 +153,7 @@ export default {
     },
     togglezhezhao(){
       this.showzhezhao= !this.showzhezhao
-      console.log('..')
+     
     }
   }
 }
@@ -584,13 +588,81 @@ export default {
     right 0px
     left 0px
     bottom 56px
-    background-color rgba(0,0,0,.4)
+    background-color rgba(0,0,0,.4)  
   .monnyshow
+    // transition transform .5s
     position fixed
     bottom 56px
     left 0
     right 0
     height 409px
     background-color #fff
-    font-size 12px
+    border-radius 10px 10px 0 0
+    padding 19px 19px 0px
+    box-sizing border-box
+    overflow hidden
+    // &.shanghua
+    //   transform translateY(-54px)
+    // &.xiahua  
+    //   transform translateY(54px)
+    .h3
+      position absolute
+      top 21px
+      left 173px
+      
+      >h3
+        font-size 25px
+        font-weight 700
+        margin-right 131px
+      .tuichu
+        &:after
+          width 28px
+          height 28px
+          background url('./img/退出.png') no-repeat left top/28px 28px
+          content ''
+          display inline-block
+          position absolute
+          top -1px
+          right -16px
+    .allmonnya
+    
+      font-size 16px
+     
+      & span:first-of-type
+        position absolute
+        left 19px
+        top 90px
+      & span:nth-of-type(2)
+        position absolute
+        right 19px
+        top 90px
+    .allmonnyb 
+      font-size 16px
+      & span:first-of-type
+        position absolute
+        left 19px
+        top 140px
+      & span:nth-of-type(2)
+        position absolute
+        right 19px
+        top 140px
+    .youhui
+      position absolute
+      top 214px
+      left 19px
+      .left
+        >p
+          font-size 16px
+          font-weight 700       
+          margin-bottom 16px
+        >span
+          font-size 13px
+          color #ccc
+      .right
+        position absolute
+        top 0
+        left 315px
+        font-size 19px
+        color red   
+        white-space nowrap   
 </style>
