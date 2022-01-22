@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@vant/area-data": "^1.2.1",
     "amfe-flexible": "^2.2.1",
     "better-scroll": "^1.11.1",
     "mint-ui": "^2.2.13",
@@ -18,6 +19,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "swiper": "^4.2.6",
+    "vant": "^2.12.39",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
@@ -28,6 +30,7 @@
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",
+    "babel-plugin-import": "^1.13.3",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-plugin-transform-vue-jsx": "^3.5.0",

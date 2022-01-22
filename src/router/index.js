@@ -13,6 +13,10 @@ import personal from '../pages/personal/home.vue'
 import shopcart from '../pages/shopcart/home.vue'
 import usersetting from '../pages/usersetting/home.vue'
 import addressmanage from '../pages/usersetting/addressmanage/addressmanage.vue'
+import area from '../pages/area/home.vue'
+import adddizi from '../pages/common/address/addaddress.vue'
+import updatedizi from '../pages/common/address/updateaddress.vue'
+
 
 
 Vue.use(Router)
@@ -117,6 +121,18 @@ export default new Router({
       meta:{
         showFooter:false
       }
+    },
+    {
+      path:'/area',
+      component:area
+    },
+    {
+      path:'/adddizi',
+      component:adddizi
+    },
+    {
+      path:'/updatedizi',
+      component:updatedizi
     }
 
   ],
