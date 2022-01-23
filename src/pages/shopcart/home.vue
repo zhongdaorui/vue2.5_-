@@ -15,7 +15,7 @@
           <span @click="toggledelete">完成</span>
         </div>
     </div>
-    <div class="list_content"  v-for="k in 3">
+    <div class="list_content"  v-for="(item,index) in cartgoods" :key="index">
       <div class="list_content_container">
         <div class="chckbox">
           <span class="iconfont icon-duigou"></span>
@@ -27,24 +27,23 @@
            <span class="iconfont icon-duigou"></span>
            <img src="//img10.360buyimg.com/mobilecms/s234x234_jfs/t1/101805/40/20783/198822/61d9b62eEd68a7f88/c246c15cbda5cd86.jpg!q70.dpg.webp" alt="">
            <div class="datalist">
-             <span>露安适柔护纸尿裤 新生儿尿不湿小包装宝宝纸尿片透气干爽 夜用S码26片
-            </span>     
+             <span>{{item.goodsname}}</span>     
              <div class="size">
                <span>夜用s码26片,</span>
                <span>选服务</span>
              </div>
-             <span>￥<em>99.</em>00
+             <span>￥<em>{{item.price}}</em>00
              </span>
              <div class="shul">
-               <span class="iconfont icon-jianhao"></span>
-               <span>1</span>
-               <span class="iconfont icon-jiahao"></span>
+               <span class="iconfont icon-jianhao"    @click="isaddcount(false)"></span>
+               <span>{{item.count}}</span>
+               <span class="iconfont icon-jiahao"   @click="isaddcount(true)"></span>
              </div>
            </div>
         </div>
         <div class="tixin">
           <span>移入关注</span>
-          <span>删除</span>
+          <span @click="deletecartgood(index)">删除</span>
         </div>
       </div>
     </div>
@@ -100,14 +99,14 @@
       </div>
       <div class="right">
         <span >移至收藏</span>
-        <span>删除</span>
+        <span >删除</span>
       </div>
     </div>
-    <div class="zhezhao" v-show="showzhezhao" @click="togglezhezhao"></div> 
-    <div class="monnyshow" v-show="showzhezhao"  :class="showzhezhao?'shanghua':'xiahua'">
+    <van-overlay :show="show" @click="togglezhezhao">
+      <div class="monnyshow" @click.stop>
         <div class="h3">
           <h3>金额明细</h3>
-          <span class="tuichu" @click="togglezhezhao" ></span>
+          <span class="tuichu"  @click="togglezhezhao"></span>
         </div>  
         <div class="allmonnya">
           <span>商品总额</span>
@@ -124,7 +123,10 @@
           </div>
           <div class="right">-￥80.00</div>
         </div>
-    </div>   
+      </div>   
+    </van-overlay>
+   
+  
            
        
 
@@ -133,17 +135,17 @@
 </template>
 
 <script>
+import { Toast,MessageBox } from 'mint-ui';
+import {mapState} from 'vuex'
 import HeaderTop from '../common/home.vue'
+import { Popup,Overlay } from 'vant';
 export default {
-  components:{
-    HeaderTop
-  },
+  
   data(){
     return{
         showAllDelete:false,//显示是否展示删除
-        showzhezhao:false,//展示是否显示遮罩和金额明细面板
-       
-
+        show: false,//展示是否显示遮罩和金额明细面板  
+        count:0
     }
   
   },
@@ -152,9 +154,43 @@ export default {
       this.showAllDelete=!this.showAllDelete
     },
     togglezhezhao(){
-      this.showzhezhao= !this.showzhezhao
-     
-    }
+      this.show= !this.show
+      console.log('.')
+    },
+    getcount(count){
+      this.count = count
+    },
+      isaddcount(isadd){
+        if (isadd) {
+          console.log('.')
+          if (this.cartgoods.count<10) {
+           this.cartgoods.count++
+          }else{
+            Toast('最多买10件');
+            this.cartgoods.count = 10
+          }
+          
+        }else{
+          if (this.cartgoods.count>1) {
+            this.cartgoods.count--
+          }else{
+             Toast('最少买1件');
+           this.cartgoods.count = 1
+          } 
+        }
+      },
+     deletecartgood(index){
+        this.$store.dispatch('deletecartshop',index)
+      }
+  },
+  components:{
+    [Popup.name]:Popup,
+    [Overlay.name]:Overlay,
+    HeaderTop
+  },
+  computed:{
+    ...mapState(['goods','cartgoods']),
+  
   }
 }
 </script>
@@ -582,29 +618,15 @@ export default {
         border-radius 30px
         padding 8px 16px
         border 1px solid #ccc
-  .zhezhao
-    position fixed
-    top 55px
-    right 0px
-    left 0px
-    bottom 56px
-    background-color rgba(0,0,0,.4)  
   .monnyshow
-    // transition transform .5s
     position fixed
-    bottom 56px
+    bottom 0px
     left 0
     right 0
     height 409px
     background-color #fff
-    border-radius 10px 10px 0 0
     padding 19px 19px 0px
     box-sizing border-box
-    overflow hidden
-    // &.shanghua
-    //   transform translateY(-54px)
-    // &.xiahua  
-    //   transform translateY(54px)
     .h3
       position absolute
       top 21px
@@ -624,10 +646,8 @@ export default {
           position absolute
           top -1px
           right -16px
-    .allmonnya
-    
+    .allmonnya    
       font-size 16px
-     
       & span:first-of-type
         position absolute
         left 19px

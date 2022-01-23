@@ -12,8 +12,10 @@
   "dependencies": {
     "@vant/area-data": "^1.2.1",
     "amfe-flexible": "^2.2.1",
+    "axios": "^0.18.0",
     "better-scroll": "^1.11.1",
     "mint-ui": "^2.2.13",
+    "mockjs": "^1.0.1-beta3",
     "px2rem-loader": "^0.1.9",
     "store2": "^2.13.1",
     "stylus": "^0.54.5",

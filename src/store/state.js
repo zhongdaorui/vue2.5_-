@@ -1,7 +1,8 @@
 export default{
   userinfo:{},//用户消息
-  cartgoods:[],//购物车商品列表
-  goods:[],//商品列表
+  cartgoods:[],//购物车商品
+  goods:[],//商品
+  shagoods:[],//秒杀商品
   
 
 

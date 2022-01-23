@@ -131,23 +131,6 @@ export default {
           font-size 25px      
           position relative       
           color #ccc
-          // background-color #ccc
-  
-    
-   
-  .twoqiuqiu
-    text-align center 
-    margin-bottom 30px
-    ul
-      display flex
-      margin-left 186px  
-      li
-        width 6px
-        height 6px
-        border-radius 6px
-        background-color #fff
-        margin-right 3px
-      li:nth-child(1)  
-        background-color red 
+          
 
 </style>

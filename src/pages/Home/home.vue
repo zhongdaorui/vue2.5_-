@@ -14,6 +14,9 @@ export default {
   components:{
     HeaDer,
     JdFastp
+  },
+  mounted(){
+     this.$store.dispatch('getshagoods')
   }
 }
 </script>

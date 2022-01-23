@@ -8,6 +8,7 @@ import './assets/styles/reset.css'
 import store  from './store'
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
+import '../static/mock/mockServer.js'
 Vue.use(Mint);
 
 

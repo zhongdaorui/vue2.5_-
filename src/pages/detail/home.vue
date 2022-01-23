@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="warp" >
     <div class="inner" >
       <div class="top" >
@@ -142,53 +143,41 @@
             </div>
           </div> -->
         </div>
+    </div>
+    <div class="warp_footer">
+      <div class="shop">
+        <span>店铺</span>
       </div>
-      <footer-button @join-cart="changeshowshopping" />
-      <div class="warpppp" v-show="showshopping" >
-        <div class="introduce">
-          <img src="//m.360buyimg.com/mobilecms/s750x750_jfs/t1/95137/10/21798/151662/61e2f3e8Ea768a8f6/32bf7542df2b4ed4.jpg!q80.dpg.webp" alt="">
-          <div class="middle"  >
-            <span >￥<em>{{goods.price}}</em>.00</span>
-            <span>
-              <em>已选</em>
-              {{goods.size}}克(含工费70元)，1个
-            </span>
+      <div class="kefu">
+        <span>客服</span>
+      </div>
+      <div class="shopping">
+        <div class="contain" >  
+          <div class="outer" >
+            <span class="count">{{cartgoods.length}}</span>
           </div>
-          <div class="right"  @click="changeshowshopping"></div>
-        </div>
-        <div class="size">
-          <div class="sizeh3">尺码</div>
-          <div class="classify">
-            <div>1.67克(含工费70元)</div>
-            <div>1.72克(含工费70元)</div>
-          </div>
-        </div>
-        <div class="count">
-          <div>数量</div>
-          <div class="input_size">
-            <span @click="isaddcount(false)">-</span>
-            <div class="controlcount">{{goods.count}}</div>
-            <span @click="isaddcount(true)">+</span>
-          </div>
-        </div>
-        <div class="footer_button" @click="updatecartgoods">
-          确认
+          <span class="gou" @click="$router.push('/shopcart')">购物车</span>
         </div>
       </div>
-      <div class="zhezhao" v-show="showshopping" @click="changeshowshopping" ref="zhezhao"></div>
-    
+      <div class="addcar"  @click="showGood()">加入购物车</div>
+      <div class="nowshop" style="font-size:12px">立即购买</div>
+    </div>
     <Gallary :list="list" v-show="showgallary"  @close="changegallary">
     </Gallary>
   </div>   
   </div>
+  <Good ref="good" :goods="good"/>
+</div>
+  
 </template>
 
 <script>
+import Good from './components/good.vue'
 import {mapActions,mapState} from 'vuex'
 import { Toast,MessageBox } from 'mint-ui';
 import swiper from '../common/swiper/Swiper.vue'
 // import CartClassify from './components/cartclassify.vue'
-import FooterButton from './components/FooterButton.vue'
+
 import Gallary from '../common/gallary/Gallary.vue'
 export default {
   data(){
@@ -201,90 +190,47 @@ export default {
       '//m.360buyimg.com/mobilecms/s843x843_jfs/t8677/324/1257355457/138314/3993660b/59b75894N0d83e8ec.jpg!q70.dpg.webp',
       ],
       showgallary:false,
-      goods:{
-        goodsname:'iphone13',
-        price:5560,
-        count:5,
-        size:'1.72',
-        imgurl:'',
-        huoodng:''
-        
-      
-      },
-     
-      
+    
     }
   },
+ 
   methods:{
     
     goto(){
       this.$router.push('/')
     },
-    changeshowshopping(){
-        this.showshopping = !this.showshopping
-        this.$refs.zhezhao.addEventListener("touchstart",function(e){
-			 		// e.stopPropagation();
-			 		e.preventDefault();
-			 	},false);
-			},
+    showGood(good){
+      this.$refs.good.changeshowshopping()
+    },
       changegallary(){       
-         this.showgallary = !this.showgallary    
+         this.showgallary = !this.showgallary 
+       
       },
-      isaddcount(isadd){
-        if (isadd) {
-          console.log('.')
-          if (this.goods.count<10) {
-           this.goods.count++
-          }else{
-            Toast('最多买10件');
-            this.goods.count = 10
-          }
-          
-        }else{
-          if (this.goods.count>1) {
-            this.goods.count--
-          }else{
-             Toast('最少买1件');
-           this.goods.count = 1
-          } 
-        }
-          
-      },
-      updatecartgoods(){
-        this.$store.dispatch('updatecartgoods',this.goods)
-        this.showshopping = !this.showshopping
-        Toast({
-        message: '加入购物车',
-        position: 'middle',
-        duration: 2000
-      });
-      },
+    
       getsize(){
         
       }
     },
     mounted(){
-      
+     
     },
     deactivated(){
       this.showgallary=false
      
     },
-    // watch:{
-    //   size(value){
-    //     size = '1.72'
-    //     console.log(value)
-        
-    //   }
-    // },
+
   computed:{
-    ...mapState(['cartgoods'])
+    ...mapState(['cartgoods','goods']),
+      good(){
+        return this.goods[0]
+     
+    }
   },
   components:{
-    FooterButton,
-    //  CartClassify,
+ 
      Gallary,
-     swiper 
+     swiper,
+     Good 
   }
 }
 </script>
@@ -295,8 +241,6 @@ export default {
   overflow-x hidden
   height 100%
   .inner
-
- 
     .top
       z-index 0
       position relative
@@ -306,13 +250,9 @@ export default {
         top 0
         left 0
         right 0
-        bottom 0
-        
+        bottom 0  
         width 100%
         z-index 1
-          
-        
-        
         & span:nth-of-type(1)  
           position absolute
           left 3px
@@ -608,124 +548,117 @@ export default {
           font-size 12px
           display flex
           flex-flow column
-    .warpppp
-      height 466px
-      background-color #fff
-      width 100%
-      box-sizing border-box
-      padding 24px 15px 5px
-      border-radius 18px 18px 0 0 
+    .warp_footer
+      display flex
+      overflow-y hidden
       position fixed
       left 0
+      height 53px
       right 0
       bottom 0
-      z-index 99
-      .introduce
-        display flex
+      background-color #fff
+      border-top 1px solid #ccc
+      box-sizing border-box
+      padding 5px 3px 3px 16px
+      .shop
+        width 33px
+        height 43px
+        margin-right 30px
+        font-size 13px
         position relative
-        >img
-          width 116px
-          height 116px
-          margin-right 15px
-        .middle
-          position relative
-          & span:first-child
-            position absolute
-            top 49px
-            left -3px
-            font-size 12px
-            color red   
-            em
-              font-size 25px
-              font-weight 700  
-          & span:last-child
-            font-size 12px
-            display block
-            position absolute
-            top 102px
-            left 0
-            white-space nowrap
-            em 
-              color #ccc
-              margin-right 16px
-        .right
+        &:before
+          content ''
+          display block
+          background url('./components/img/店铺.png') no-repeat center top/25px 24px 
+          width 25px
+          height 24px
+          color red
           position absolute
           top 0
-          right 0px
-          &:before
-            content ''
-            display inline-block
-            width 27px
-            height 27px
-            background url('./components/img/删除.png') no-repeat left top/27px 27px      
-      .size
-        margin-top 36px
-        .sizeh3
-          font-size 15px
-          margin-bottom 15px
-          font-weight 700
-        .classify
-          display flex
-          & div:first-child,& div:last-child
-            font-size 14px
-            padding 10px 20px
-            border-radius 30px
-            border 1px solid red
-            margin-right 18px
-            background-color #f2f2f2
-      .count
-        margin-top 35px
+          left 5px
         
-        display flex
-        position relative
-        & div:first-child
-          font-size 15px
-          font-weight 700
-        & div:last-child  
+        & span:first-child
+          font-size 13px
           position absolute
-          top -12px
-          right 20px
-          & span:first-child
-            font-size 33px
-            color black   
+          left 3px
+          top 27px
+      .kefu
+        width 33px
+        height 43px
+        margin-right 30px
+        font-size 13px
+        position relative
+        &:before
+          content ''
+          display block
+          background url('./components/img/客服.png') no-repeat center top/25px 24px 
+          width 25px
+          height 24px
+          color red
+          position absolute
+          top 0
+          left 5px
+        & span:first-child
+          font-size 13px
+          position absolute
+          left 3px
+          top 27px
+      .shopping
+        width 33px
+        height 43px
+        margin-right 23px
+        font-size 13px
+        position relative
+        &:before
+          content ''
+          display block
+          background url('./components/img/购物车.png') no-repeat center top/25px 24px 
+          width 25px
+          height 24px
+          color red
+          position absolute
+          top 0
+          left 5px
+          z-index 2
+        .contain
+          .outer
+            .count
+              font-size 13px
+              position absolute
+              left 25px
+              top 0px 
+              z-index 9999
+              color red
+              border 1px solid red
+              width 12px
+              height 12px
+              border-radius 12px
+              font-size 12px
+              font-weight 700
+              text-align center
+              line-height 12px
+          .gou    
+            font-size 13px
             position absolute
-            left -17px
-            top -8px
-          .controlcount
-            width 40px
-            height 20px
-            line-height 20px
-            background-color #ccc
-            color black
-            font-size 12px
-            text-align center
-            color #262626
-            font-weight 700
-          & span:last-child  
-            ont-size 30px
-            color black     
-            position absolute
-            right  -22px
-            top -3px
-      .footer_button
-        position absolute
-        bottom 4px
-        left 17px
-        right 17px
-        background-color red
+            left 0px
+            top 27px  
+            white-space nowrap
+      .addcar
+        background-color #f2270c
+        padding 15px 20px 20px 20px
+        font-size 14px
+        // width 115px
+        // height 38px
+        // line-height 38px
         color #fff
-        font-size 15px
-        font-weight 700
-        padding 11px 181px
-        border-radius 20px      
-    .zhezhao
-      position fixed
-      background-color rgba(0,0,0,.5) 
-      top 0      
-      left 0
-      right 0
-      bottom 0
-      z-index 9
-
+        margin-right 6px
+        border-radius  57px
+        // box-sizing border-box
+      .nowshop
+        background-color #ffc30d
+        padding 15px 28px 20px 28px
+        font-size 14px
+        color #fff
+        border-radius  60px     
 
 </style>
