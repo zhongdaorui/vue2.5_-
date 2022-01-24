@@ -2,12 +2,13 @@
 <div>
   <div class="liebiao" > 
     <header-top class="topbc" title="收货地址"/>
-    <div class="item">
-      <div class="top_di">钟道锐 188****5316</div>
+    <div class="item" v-for="(item,index) in address" :key="index">
+      <div class="top_di">{{item.name}} {{item.massageway}}</div>
       <div class="bottom_di">
         <div class="left">
           <span>默认</span>
-          湖北武汉市江夏区佛祖岭街道光谷大道112</br>号当代国际花园3栋B座荔枝精选酒店(光谷金融港</br>北地铁站店)
+          <span>{{item.detailarea}}</span>
+          <span>{{item.nowarea}}</span>
         </div>
         <div class="right">
           <span @click="$router.push('/updatedizi')">编辑</span>
@@ -27,7 +28,7 @@
 
 
 <script>
-
+import {mapState} from 'vuex'
 import HeaderTop from '../../common/home.vue'
 export default {
   data(){
@@ -37,6 +38,36 @@ export default {
   },
   components:{
     HeaderTop
+  },
+  computed:{
+    ...mapState(["address"]),
+    addressList(){
+    const result = []
+    const detailarealist =[]
+    const nowarealist = []
+    for (let item in this.address){
+    const detailarea =this.address[item].detailarea
+    const nowarea =this.address[item].nowarea
+    nowarealist.push(nowarea)
+    detailarealist.push(detailarea)
+     }
+     return nowarealist.concat(detailarealist)
+
+    // let temp =[]
+    // if(this.address&&this.address.length>0){
+    //   this.address.map(res=>{
+    //     temp.push(Object.assign({},res,{detailAddress: res.nowarea.replaceAll(" ","")+res.detailarea}))
+    //   })
+    //   console.log(temp)
+    //   return temp
+    // }else{
+    //   return []
+    // }
+  }
+    
+  },
+  mounted(){
+      
   }
 }
 </script>
@@ -58,8 +89,10 @@ export default {
     margin-bottom 14px
   .bottom_di
     .left
-      font-size 15px
-      line-height 20px
+      font-size 16px
+      line-height 25px
+      color $ziti
+      width 353px
       & span:first-child
         width 34px
         height 15px

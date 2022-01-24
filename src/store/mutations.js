@@ -5,6 +5,10 @@ import { RECEIVE_USER_INFO,
   RECEIVE_CARTGOODS,
   RECEIVE_SHAGOODS,
   CARTGOODS_DELETE,
+  RECEIVE_ADDRESS,
+  ADD_ADDRESS,
+  UPDATA_ADDRESS,
+  DELETE_ADDRESS,
 
 } from "./mutation-type";
 
@@ -29,5 +33,19 @@ export default{
   },
   [CARTGOODS_DELETE](state,{index}){
     state.cartgoods.splice(index,1)
+  },
+  [ RECEIVE_ADDRESS](state,{addressslist}){
+    state.address = addressslist
+  },
+  
+  
+  [ADD_ADDRESS](state,{...address}){
+    state.address.push({...address})
+  },
+  [UPDATA_ADDRESS](state,{index,addressobj}){
+    state.address.splice(index,1,addressobj)
+  },
+  [DELETE_ADDRESS](state,{index}){
+    state.address.splice(index,1)
   }
 }

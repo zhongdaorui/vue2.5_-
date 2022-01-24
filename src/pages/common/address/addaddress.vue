@@ -2,22 +2,22 @@
   <div class="collect_message">
     <div class="common name">
       <span>收货人</span>
-      <input type="text" placeholder="姓名">
+      <input type="text" placeholder="姓名" v-model="name">
     </div>
     <div class="phone_number common">
       <span>联系方式</span>
       <span>+86</span>
       <span class="iconfont icon-jinrujiantou"></span>
-      <input type="text" placeholder="手机号码">
+      <input type="text" placeholder="手机号码" v-model="massageway">
     </div>
     <div class="where common">
       <span>所在地区</span>
-      <span v-for="(item,index) in list" :key="index" class="city">{{item}}</span>
+      <span v-for="(item,index) in nowarea" class="city">{{item}}</span>
       <span class="iconfont icon-jiantouzuo" @click="showarealist"></span>
     </div>
     <div class="detailwhere common">
       <span>详细地址</span>
-      <input type="text" placeholder="详细地址需填写楼栋楼层或房间号信息">
+      <input type="text" placeholder="详细地址需填写楼栋楼层或房间号信息" v-model="detailarea">
     </div>
     <div class="biaoqian">
       <em>地址标签</em>
@@ -34,7 +34,7 @@
         <van-switch v-model="checked" active-color="red" inactive-color="#ccc" />
       </div>
       <div class="footer_button">
-        <span>确认</span>
+        <span @click="addaddress" >确认</span>
       </div>
     </div>
     <van-overlay :show="show" class="contain" @click="showarealist">
@@ -55,8 +55,13 @@ export default {
     return{
       checked: true,
       areaList,
-      list:[],
-      show: false
+      show: false,
+      massageway:'',//联系方式
+      name:'',//姓名
+      nowarea:'',//省市区
+      detailarea:'',//详细地址
+
+      
 
     }
   },
@@ -68,7 +73,7 @@ export default {
          result.push(item[curKey[1]])
     })
       
-      this.list = result
+      this. nowarea = result
       this.show = !this.show
     
     },
@@ -76,6 +81,16 @@ export default {
       // this.showarea =!this.showarea
       this.show = !this.show
     },
+    addaddress(){
+      const {name,massageway,nowarea,detailarea}=this
+      const address = {name,massageway,nowarea,detailarea}
+      
+
+      // console.log(addressobj)
+      this.$store.dispatch('addAddress',{...address})
+      this.$router.push('/addressmanage')
+
+    }
   },
   components:{
     [Switch.name]:Switch,

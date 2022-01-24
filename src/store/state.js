@@ -3,6 +3,7 @@ export default{
   cartgoods:[],//购物车商品
   goods:[],//商品
   shagoods:[],//秒杀商品
+  address:[],//收货地址
   
 
 

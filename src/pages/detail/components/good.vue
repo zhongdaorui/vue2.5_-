@@ -65,25 +65,7 @@ export default {
          changeshowshopping(){
         this.show = !this.show
     },
-      isaddcount(isadd){
-        if (isadd) {
-          console.log('.')
-          if (this.goods.count<10) {
-           this.goods.count++
-          }else{
-            Toast('最多买10件');
-            this.goods.count = 10
-          }
-          
-        }else{
-          if (this.goods.count>1) {
-            this.goods.count--
-          }else{
-             Toast('最少买1件');
-           this.goods.count = 1
-          } 
-        }
-      },
+      
    
   }
 }

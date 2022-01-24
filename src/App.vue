@@ -10,18 +10,22 @@
 
 <script>
 import FooterGuide from './pages/common/Footerguide.vue'
-import {reqGoods,reqshaGoods} from './api/index'
+import {mapActions,mapState} from 'vuex'
 export default {
   name: 'App',
   components:{
     FooterGuide
   },
-  // async mounted(){
-  //   const result= await reqGoods();
-  //   console.log(result.data)
-  //   const shagoods= await reqshaGoods();
-  //    console.log(shagoods.data)
-  // }
+  computed:{
+    ...mapState(["address"])
+  },
+  mounted(){
+    this.getaddress()
+  },
+  methods:{
+    ...mapActions(["getaddress"])
+  }
+ 
 }
 </script>
 
