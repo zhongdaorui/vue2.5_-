@@ -73,7 +73,7 @@ export default {
          result.push(item[curKey[1]])
     })
       
-      this. nowarea = result
+      this.nowarea = result
       this.show = !this.show
     
     },
@@ -82,15 +82,18 @@ export default {
       this.show = !this.show
     },
     addaddress(){
-      const {name,massageway,nowarea,detailarea}=this
-      const address = {name,massageway,nowarea,detailarea}
-      
+      const {name,massageway,detailarea,nowarea}=this
+      const addresslist = {name,massageway,nowarea,detailarea}
 
       // console.log(addressobj)
-      this.$store.dispatch('addAddress',{...address})
+      
+      this.$store.dispatch('addAddress',{...addresslist})
       this.$router.push('/addressmanage')
 
     }
+  },
+  computed:{
+
   },
   components:{
     [Switch.name]:Switch,

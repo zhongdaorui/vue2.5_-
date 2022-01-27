@@ -8,6 +8,6 @@ export const  RECEIVE_ADDRESS = 'receive_address'//接收收货列表
 export const  ADD_ADDRESS = 'add_address'//新增收货地址
 export const  UPDATA_ADDRESS = 'update_address'//更新收货地址
 export const  DELETE_ADDRESS = 'delete_address'//删除收货地址
-
+export const SELECT_ALL_TODOS = 'select_all_todos' // 全选/全不选todos
 
 

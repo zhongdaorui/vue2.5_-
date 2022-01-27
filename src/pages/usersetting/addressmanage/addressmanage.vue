@@ -2,16 +2,16 @@
 <div>
   <div class="liebiao" > 
     <header-top class="topbc" title="收货地址"/>
-    <div class="item" v-for="(item,index) in address" :key="index">
+    <div class="item" v-for="(item,index) in  address" :key="index">
       <div class="top_di">{{item.name}} {{item.massageway}}</div>
       <div class="bottom_di">
         <div class="left">
           <span>默认</span>
-          <span>{{item.detailarea}}</span>
           <span>{{item.nowarea}}</span>
+          <span>{{item.detailarea}}</span>
         </div>
         <div class="right">
-          <span @click="$router.push('/updatedizi')">编辑</span>
+          <span  @click="editaddress(index)">编辑</span>
         </div>
        
       </div>
@@ -30,6 +30,7 @@
 <script>
 import {mapState} from 'vuex'
 import HeaderTop from '../../common/home.vue'
+
 export default {
   data(){
     return{
@@ -42,16 +43,17 @@ export default {
   computed:{
     ...mapState(["address"]),
     addressList(){
-    const result = []
-    const detailarealist =[]
-    const nowarealist = []
-    for (let item in this.address){
-    const detailarea =this.address[item].detailarea
-    const nowarea =this.address[item].nowarea
-    nowarealist.push(nowarea)
-    detailarealist.push(detailarea)
-     }
-     return nowarealist.concat(detailarealist)
+    // const result = []
+    // const detailarealist =[]
+    // const nowarealist = []
+    // for (let item in this.address){
+    // const detailarea =this.address[item].detailarea
+    // const nowarea =this.address[item].nowarea
+    // nowarealist.push(nowarea)
+    // detailarealist.push(detailarea)
+    
+    //  }
+    //  return nowarealist.concat(detailarealist)
 
     // let temp =[]
     // if(this.address&&this.address.length>0){
@@ -63,11 +65,28 @@ export default {
     // }else{
     //   return []
     // }
+    // res.nowarea.join(" ")
+    // let temp =[]
+    // if(this.address&&this.address.length>0){
+    //   this.address.map(res=>{
+    //     temp.push(Object.assign({},res,{nowarea:res.nowarea.join("")}))
+    //   })
+    //   console.log(temp)
+    //   return temp
+    // }else{
+    //   return []
+    // }
   }
     
   },
   mounted(){
       
+  },
+  methods:{
+    editaddress(target){
+     
+      this.$router.push({path:`/updatedizi/${target}`})
+    }
   }
 }
 </script>
@@ -105,7 +124,7 @@ export default {
 
     .right
       position absolute
-      top 69px
+      top 60px
       right 10px
       color red
       font-size 16px

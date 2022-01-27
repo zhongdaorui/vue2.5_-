@@ -2,22 +2,22 @@
   <div class="collect_message">
     <div class="common name">
       <span>收货人</span>
-      <input type="text" placeholder="姓名">
+      <input type="text" placeholder="姓名" v-model="name">
     </div>
     <div class="phone_number common">
       <span>联系方式</span>
       <span>+86</span>
       <span class="iconfont icon-jinrujiantou"></span>
-      <input type="text" placeholder="手机号码">
+      <input type="text" placeholder="手机号码" v-model="massageway">
     </div>
     <div class="where common">
       <span>所在地区</span>
-      <span v-for="(item,index) in list" :key="index" class="city">{{item}}</span>
+      <span v-for="(item,index) in nowarea" :key="index" class="city">{{item}}</span>
       <span class="iconfont icon-jiantouzuo" @click="showarealist"></span>
     </div>
     <div class="detailwhere common">
       <span>详细地址</span>
-      <input type="text" placeholder="详细地址需填写楼栋楼层或房间号信息">
+      <input type="text" placeholder="详细地址需填写楼栋楼层或房间号信息" v-model=" detailarea">
     </div>
     <div class="biaoqian">
       <em>地址标签</em>
@@ -34,8 +34,8 @@
         <van-switch v-model="checked" active-color="red" inactive-color="#ccc" />
       </div>
       <div class="footer_button">
-        <span>确认</span>
-        <span>删除收货地址</span>
+        <span @click="updateAddress">确认</span>
+        <span @click="deletead">删除收货地址</span>
       </div>
     </div>
     <van-overlay :show="show" class="contain" @click="showarealist">
@@ -49,7 +49,8 @@
 
 
 <script>
-import { Switch,Area,Overlay } from 'vant'
+import {mapState} from'vuex'
+import { Switch,Area,Overlay, AddressList } from 'vant'
 import { areaList } from '@vant/area-data';
 export default {
   data(){
@@ -57,10 +58,18 @@ export default {
       checked: true,
       areaList,
       list:[],
-      show: false
-
+      show: false,
+      listaddress:{},
+      massageway:0,//联系方式
+      name:'',//姓名
+      nowarea:[],//省市区
+      detailarea:'',//详细地址
+      index:0,
     }
   },
+  
+ 
+
   methods:{
      queding(value){
       const result = []
@@ -77,14 +86,51 @@ export default {
       // this.showarea =!this.showarea
       this.show = !this.show
     },
-  },
+    updateAddress(){
+      const {name,massageway,detailarea,nowarea,index}=this
+      const Addresslist = {name,massageway,nowarea,detailarea}
+      this.$store.dispatch('updateAddress',{index,...Addresslist})
+      this.$router.go(-1)
+    },
+    deletead(){
+      const {index} = this
+      this.$store.dispatch('deleteAddress',{index})
+      this.$router.go(-1)
+    }
+    },
+ 
   components:{
     [Switch.name]:Switch,
     [Area.name]:Area,
     [Overlay.name]:Overlay
+  },
+
+  computed:{
+       ...mapState(['address']),
+       
+  
+  },
+  watch:{
+      $route(value){
+      
+      const index = value.params.index;
+      this.index =index
+      this.listaddress = this.address[index]
+      if(this.listaddress){
+      //  this.listaddress = this.address[index]
+       this.massageway = this.listaddress.massageway
+       this.name = this.listaddress.name
+       this.nowarea = this.listaddress.nowarea
+       this.detailarea = this.listaddress.detailarea
+      }
+       
+        
+    }       
+    },
+
   }
 
-}
+
 </script>
 
 

@@ -3,9 +3,9 @@
     <div class="header_top">
         <header-top title="购物车"/>
         <div class="di" v-if="!showAllDelete">
-          <div class="left">
+          <div class="left"  @click="toggledizi">
              <span class="iconfont icon-31dingwei"></span>
-             <span>武汉市江夏区</span>
+             <span>{{qushilist}}</span>
           </div>
           <div class="right">
             <span @click="toggledelete">编辑商品</span>
@@ -17,14 +17,8 @@
     </div>
     <div class="list_content"  v-for="(item,index) in cartgoods" :key="index">
       <div class="list_content_container">
-        <div class="chckbox">
-          <span class="iconfont icon-duigou"></span>
-          <div class="shopname">
-            <span>露安适母婴旗舰店</span>
-          </div>
-        </div>
-        <div class="shopdata">
-           <span class="iconfont icon-duigou"></span>
+        <div class="shopdata" >
+           <input type="checkbox" v-model="item.complete">
            <img src="//img10.360buyimg.com/mobilecms/s234x234_jfs/t1/101805/40/20783/198822/61d9b62eEd68a7f88/c246c15cbda5cd86.jpg!q70.dpg.webp" alt="">
            <div class="datalist">
              <span>{{item.goodsname}}</span>     
@@ -35,15 +29,15 @@
              <span>￥<em>{{item.price}}</em>00
              </span>
              <div class="shul">
-               <span class="iconfont icon-jianhao"    @click="isaddcount(false)"></span>
+               <span class="iconfont icon-jianhao"   ></span>
                <span>{{item.count}}</span>
-               <span class="iconfont icon-jiahao"   @click="isaddcount(true)"></span>
+               <span class="iconfont icon-jiahao"  ></span>
              </div>
            </div>
         </div>
         <div class="tixin">
           <span>移入关注</span>
-          <span @click="deletecartgood(index)">删除</span>
+          <span @click="deletecartgood">删除</span>
         </div>
       </div>
     </div>
@@ -76,8 +70,8 @@
     </div>
     <div class="jisuan" v-if="!showAllDelete">
       <div class="j_left">
-        <span class="iconfont icon-duigou"></span>
-        <span>全选</span>
+        <input type="checkbox" v-model="checkAll">
+        <span >全选</span>
       </div>
       <div class="j_middle" @click="togglezhezhao">
         <span>
@@ -125,7 +119,19 @@
         </div>
       </div>   
     </van-overlay>
-   
+    <van-overlay :show="isshow" @click="toggledizi">
+    <div class="wrapper" @click.stop>
+       <h3>选择地址</h3>
+       <img src="./img/退出.png" alt="" @click="toggledizi"/>
+       <div class="item" v-for="(item,index) in  addresslist" :key="index"  @click=" togglequshi(index)">
+         <input type="checkbox"  >
+         <span>{{item.nowarea}}{{item.detailarea}}</span>
+       </div>
+       <div class="footer">
+         <span>选择其他地址</span>
+       </div>
+      </div>
+    </van-overlay>
   
            
        
@@ -135,17 +141,24 @@
 </template>
 
 <script>
-import { Toast,MessageBox } from 'mint-ui';
-import {mapState} from 'vuex'
+
+
+import {mapState,mapGetters} from 'vuex'
 import HeaderTop from '../common/home.vue'
 import { Popup,Overlay } from 'vant';
+
+
+
 export default {
   
   data(){
     return{
         showAllDelete:false,//显示是否展示删除
         show: false,//展示是否显示遮罩和金额明细面板  
-        count:0
+        count:0,
+        qushilist:'武汉市青山区',
+        isshow:false,
+    
     }
   
   },
@@ -160,38 +173,61 @@ export default {
     getcount(count){
       this.count = count
     },
-      isaddcount(isadd){
-        if (isadd) {
-          console.log('.')
-          if (this.cartgoods.count<10) {
-           this.cartgoods.count++
-          }else{
-            Toast('最多买10件');
-            this.cartgoods.count = 10
-          }
-          
-        }else{
-          if (this.cartgoods.count>1) {
-            this.cartgoods.count--
-          }else{
-             Toast('最少买1件');
-           this.cartgoods.count = 1
-          } 
-        }
-      },
+   
      deletecartgood(index){
         this.$store.dispatch('deletecartshop',index)
-      }
+      },
+      toggledizi(){
+        this.isshow = !this.isshow
+      },
+      togglequshi(index){
+        this.isshow = !this.isshow
+        const result = this.address[index].nowarea
+        const qushi = result.slice(1)
+        console.log(qushi)
+        const qushilist = qushi.join().replaceAll(',','')
+        this.qushilist = qushilist
+      },
+  
+         
+ 
+  
+     
   },
   components:{
     [Popup.name]:Popup,
     [Overlay.name]:Overlay,
-    HeaderTop
+    HeaderTop,
+   
+
   },
   computed:{
-    ...mapState(['goods','cartgoods']),
-  
+    ...mapState(['goods','cartgoods','address']),
+    ...mapGetters(['isAllSelect']),
+    addresslist(){
+    if(this.address.length>0 && this.address){
+      const  result = []
+    this.address.map(item=>{
+      result.push(Object.assign({},item,{nowarea:item.nowarea.join(' ').replaceAll(" ","")}))
+    })
+    return result
+    }
+  },
+  checkAll:{
+    get(){
+      return this.$store.getters.isAllSelect
+    },
+ 
+      
+        set (value) {// 点击了全选checkbox  value是当前checkbox的选中状态(true/false)
+          // this.selectAll(value)
+          this.$store.dispatch('selectAll', value)
+        }
+    }
   }
+
+  
+ 
 }
 </script>
 
@@ -215,9 +251,11 @@ export default {
         left 24px
         & span:first-child
           font-size 18px
-          margin-right 0px
+          margin-right -2px
         & span:last-child    
           font-size 16px
+          position relative
+          left -3px
       .right
         position absolute
         top 21px
@@ -252,7 +290,6 @@ export default {
         right 16px
         top 17px 
         font-size 15px
-
   .list_content
     margin-top 15px
     background-color #fff
@@ -264,64 +301,18 @@ export default {
     position relative
     margin-bottom 10px
     .list_content_container 
-      .chckbox
-        display flex
-        .icon-duigou
-          border-radius 23px
-          width 23px
-          height 23px
-          line-height 23px
-          text-align center
-          font-weight 700
-
-          background-color red
-          color #fff
-          font-size 16px
-          margin-right 16px
-        .shopname
-          position relative
-          width 150px
-          height 26px
-          font-size 13px
-          font-weight 700
-          &:before
-            content ''
-            display inline-block
-            position absolute
-            top 3px
-            left 0px
-            width 18px
-            height 20px
-            background-size 18px 20px
-            background: url('//wq.360buyimg.com/wxsq_trade/cart/main/images/icon_pop_jd@2x_a43c7bb6.png') 0 0/16px 18px no-repeat
-          span
-            position absolute
-            top 5px
-            left 24px 
-          &:after
-            content '>'   
-            font-size 18px
-            position absolute
-            right -15px
-            top 5px
-            color #ccc
       .shopdata
         margin-top 21px
         display flex
         position relative
-        .icon-duigou
-          border-radius 23px
-          width 23px
-          height 23px
-          line-height 23px
-          text-align center
-          background-color red
-          color #fff
-          font-size 16px
-          font-weight 500
-          margin-right 16px 
-          margin-top 30px  
-          font-weight 700    
+        >input
+          width 18px
+          height 18px
+          position relative
+          top 40px
+          right 9px
+          
+          
         img
           width 120px
           height 118px
@@ -503,17 +494,9 @@ export default {
       flex 18.76%
       margin-left 15px
       margin-top 10px
-      .icon-duigou
-        border-radius 13.5px
-        width 27px
-        height 27px
-        line-height 27px
-        text-align center
-        font-weight 700
-        background-color red
-        color #fff
-        font-size 16px
-        margin-right 1px
+      >input
+        position relative
+        top 2px
       & span:last-child
         font-size 15px  
     .j_middle
@@ -685,4 +668,48 @@ export default {
         font-size 19px
         color red   
         white-space nowrap   
+  .wrapper
+    height 555px
+    background-color #fff
+    border-radius 10px 10px 0 0
+    padding 16px 12px 19px
+    box-sizing border-box
+    position absolute
+    bottom 0
+    left 0
+    right 0
+    h3
+      text-align center
+      font-size 19px
+      font-weight 700
+    img
+      width 14px
+      height 17px
+      position absolute
+      top 17px 
+      right 10px
+    .item
+      margin-top 30px
+      margin-bottom 30px
+      display flex
+      >input
+        width 24px
+        height 24px
+        margin-right 5px
+        position relative
+        top 9px
+      >span
+        font-size 16px  
+        line-height 25px  
+    .footer
+      position fixed
+      bottom 0
+      width 412px
+      line-height 47px
+      background-color red
+      text-align center
+      border-radius 30px
+      >span
+        font-size 20px
+        color #fff      
 </style>

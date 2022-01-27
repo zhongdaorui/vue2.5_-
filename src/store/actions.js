@@ -7,7 +7,8 @@ CARTGOODS_DELETE,
 RECEIVE_ADDRESS ,
 ADD_ADDRESS ,
 UPDATA_ADDRESS,
-DELETE_ADDRESS
+DELETE_ADDRESS,
+SELECT_ALL_TODOS
 
 } from "./mutation-type";
 
@@ -53,16 +54,22 @@ export default{
   }
   },
   //添加收货地址信息
-  addAddress({commit},{...address}){
-    commit(ADD_ADDRESS,{...address})
+  
+  addAddress({commit},{...addresslist}){
+    
+    commit(ADD_ADDRESS,{...addresslist})
   },
   //更新收货地址信息
-  updateAddress({commit},{index,addressobj}){
-    commit(UPDATA_ADDRESS,{index,addressobj})
+  updateAddress({commit},{index,...AddressList}){
+    commit(UPDATA_ADDRESS,{index,...AddressList})
+ 
   },
   //删除收货地址信息
   deleteAddress({commit},index){
     commit(DELETE_ADDRESS,{index})
-  }
+  },
+  selectAll ({commit}, isCheck) {
+    commit(SELECT_ALL_TODOS, {isCheck})
+  },
 
 }

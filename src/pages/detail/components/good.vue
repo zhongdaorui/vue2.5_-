@@ -45,7 +45,7 @@ export default {
    data() {
     return {
       show: false,
-     
+
     }
   },
   components:{
@@ -54,6 +54,10 @@ export default {
   methods:{
        //这是点击了确定按钮
       updatecartgoods(){
+        let key="complete"
+        let value = true
+        this.goods[key]=value
+        console.log(this.goods)
         this.$store.dispatch('updatecartgoods',this.goods)
         this.show = !this.show
         Toast({
@@ -65,6 +69,25 @@ export default {
          changeshowshopping(){
         this.show = !this.show
     },
+     isaddcount(isadd){
+        if (isadd) {
+          console.log('.')
+          if (this.goods.count<10) {
+           this.goods.count++
+          }else{
+            Toast('最多买10件');
+            this.goods.count = 10
+          }
+          
+        }else{
+          if (this.goods.count>1) {
+            this.goods.count--
+          }else{
+             Toast('最少买1件');
+           this.goods.count = 1
+          } 
+        }
+      },
       
    
   }

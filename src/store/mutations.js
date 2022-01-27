@@ -9,11 +9,9 @@ import { RECEIVE_USER_INFO,
   ADD_ADDRESS,
   UPDATA_ADDRESS,
   DELETE_ADDRESS,
+  SELECT_ALL_TODOS
 
 } from "./mutation-type";
-
-
-
 export default{
   [RECEIVE_USER_INFO](state,{userinfo}){
     state.userinfo = userinfo 
@@ -39,13 +37,20 @@ export default{
   },
   
   
-  [ADD_ADDRESS](state,{...address}){
-    state.address.push({...address})
+  [ADD_ADDRESS](state,{...addresslist}){
+   
+    state.address.push(addresslist)
+  
+ 
   },
-  [UPDATA_ADDRESS](state,{index,addressobj}){
-    state.address.splice(index,1,addressobj)
+  [UPDATA_ADDRESS](state,{index,...AddressList}){
+    
+    state.address.splice(index,1,AddressList)
   },
   [DELETE_ADDRESS](state,{index}){
     state.address.splice(index,1)
-  }
+  },
+  [SELECT_ALL_TODOS] (state, {isCheck}) {
+    state.cartgoods.forEach(todo => todo.complete = isCheck)
+  },
 }

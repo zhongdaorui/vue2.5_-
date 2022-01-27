@@ -131,7 +131,7 @@ export default new Router({
       component:adddizi
     },
     {
-      path:'/updatedizi',
+      path:'/updatedizi/:index',
       component:updatedizi
     }
 
