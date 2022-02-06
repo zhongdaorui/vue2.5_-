@@ -6,3 +6,5 @@ export const reqGoods = () => ajax('/goods')
 export const reqshaGoods = () => ajax('/shagoods')
 //获取收获列表
 export const reqAddress = () => ajax('/delivery')
+//获取分类数据
+export const reqCategory = () => ajax('/category')

@@ -12,7 +12,7 @@
     </div>
     <div class="where common">
       <span>所在地区</span>
-      <span v-for="(item,index) in nowarea" class="city">{{item}}</span>
+      <span v-for="(item,index) in nowarea" :key="index" class="city">{{item}}</span>
       <span class="iconfont icon-jiantouzuo" @click="showarealist"></span>
     </div>
     <div class="detailwhere common">
@@ -34,7 +34,7 @@
         <van-switch v-model="checked" active-color="red" inactive-color="#ccc" />
       </div>
       <div class="footer_button">
-        <span @click="addaddress" >确认</span>
+        <span @click.prevent="addDizi">确认</span>
       </div>
     </div>
     <van-overlay :show="show" class="contain" @click="showarealist">
@@ -58,7 +58,7 @@ export default {
       show: false,
       massageway:'',//联系方式
       name:'',//姓名
-      nowarea:'',//省市区
+      nowarea:[],//省市区
       detailarea:'',//详细地址
 
       
@@ -81,24 +81,28 @@ export default {
       // this.showarea =!this.showarea
       this.show = !this.show
     },
-    addaddress(){
+  addDizi(){
       const {name,massageway,detailarea,nowarea}=this
-      const addresslist = {name,massageway,nowarea,detailarea}
-
-      // console.log(addressobj)
-      
-      this.$store.dispatch('addAddress',{...addresslist})
-      this.$router.push('/addressmanage')
+      const adress = {name,massageway,nowarea,detailarea}
+      console.log(adress)
+      // this.$store.dispatch('addAddress',{...addresslist})
+       this.$store.dispatch('addAddress',adress);
+       this.$router.go(-1)
 
     }
   },
-  computed:{
 
-  },
   components:{
     [Switch.name]:Switch,
     [Area.name]:Area,
     [Overlay.name]:Overlay
+  },
+  deactivated(){
+    this.massageway = '',
+    this.name = '',
+    this.nowarea = '',
+    this. detailarea = ""
+    console.log('执行了')
   }
 
 }

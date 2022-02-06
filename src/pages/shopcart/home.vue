@@ -76,13 +76,13 @@
       <div class="j_middle" @click="togglezhezhao">
         <span>
           总计：
-          <em>￥4470.30</em>
+          <em>￥{{totalPrice}}</em>
         </span>
-        <span>已优惠745.7元</span>
+        <span class="syouhui">已优惠745.7元</span>
       </div>
       <div class="j_right">
         <span>领卷结算
-          <em>(7件)</em>
+          <em>{{sum}}</em>
         </span>
       </div>
     </div>
@@ -158,6 +158,7 @@ export default {
         count:0,
         qushilist:'武汉市青山区',
         isshow:false,
+      
     
     }
   
@@ -188,19 +189,34 @@ export default {
         const qushilist = qushi.join().replaceAll(',','')
         this.qushilist = qushilist
       },
+
+     
   
          
  
   
      
   },
+  // computed:{
+  //     totalPrice(){
+  //       var totalPrice = 0;
+  //       this.cartgoods.forEach(element =>{
+  //       totalPrice  += element.count*element.price
+  //     })
+  //     console.log('..')
+  //     return  totalPrice
+
+  //     }
+ 
+  // },
+    
+  
   components:{
     [Popup.name]:Popup,
     [Overlay.name]:Overlay,
     HeaderTop,
-   
-
   },
+ 
   computed:{
     ...mapState(['goods','cartgoods','address']),
     ...mapGetters(['isAllSelect']),
@@ -217,12 +233,24 @@ export default {
     get(){
       return this.$store.getters.isAllSelect
     },
- 
-      
-        set (value) {// 点击了全选checkbox  value是当前checkbox的选中状态(true/false)
-          // this.selectAll(value)
-          this.$store.dispatch('selectAll', value)
-        }
+    set (value) {// 点击了全选checkbox  value是当前checkbox的选中状态(true/false)
+      // this.selectAll(value)
+      this.$store.dispatch('selectAll', value)
+    }
+    },
+    //计算总价
+    totalPrice(){
+    var totalPrice = 0;
+    this.cartgoods.forEach(element =>{
+    totalPrice  += element.count*element.price
+  })
+      console.log('..')
+      return  totalPrice
+
+    },
+    //计算购物车的数量
+    sum(){
+     return this.cartgoods.length
     }
   }
 
@@ -232,6 +260,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.warp >>> .syouhui
+  position: relative
+  left -35px
 .warp
   background-color rgb(242 242 242)
   .header_top

@@ -19,6 +19,7 @@ import updatedizi from '../pages/common/address/updateaddress.vue'
 
 
 
+
 Vue.use(Router)
 
 const originalPush = Router.prototype.push
@@ -131,9 +132,10 @@ export default new Router({
       component:adddizi
     },
     {
-      path:'/updatedizi/:index',
+      path:'/updatedizi',
       component:updatedizi
-    }
+    },
+  
 
   ],
   scrollBehavior (to, from, savedPosition) {

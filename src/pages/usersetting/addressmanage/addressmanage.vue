@@ -1,14 +1,16 @@
 <template>
 <div>
-  <div class="liebiao" > 
+  <div class="liebiao"> 
     <header-top class="topbc" title="收货地址"/>
-    <div class="item" v-for="(item,index) in  address" :key="index">
+    <div class="item" v-for="(item,index) in addressList" :key="index
+    ">
       <div class="top_di">{{item.name}} {{item.massageway}}</div>
       <div class="bottom_di">
         <div class="left">
           <span>默认</span>
-          <span>{{item.nowarea}}</span>
-          <span>{{item.detailarea}}</span>
+          <!-- <span>{{item.nowarea}}</span>
+          <span>{{item.detailarea}}</span> -->
+          <span>{{item.detailAddress}}</span>
         </div>
         <div class="right">
           <span  @click="editaddress(index)">编辑</span>
@@ -55,16 +57,15 @@ export default {
     //  }
     //  return nowarealist.concat(detailarealist)
 
-    // let temp =[]
-    // if(this.address&&this.address.length>0){
-    //   this.address.map(res=>{
-    //     temp.push(Object.assign({},res,{detailAddress: res.nowarea.replaceAll(" ","")+res.detailarea}))
-    //   })
-    //   console.log(temp)
-    //   return temp
-    // }else{
-    //   return []
-    // }
+    let temp =[]
+    if(this.address&&this.address.length>0){
+      this.address.map(res=>{
+        temp.push(Object.assign({},res,{detailAddress: res.nowarea.join(" ")+' '+res.detailarea}))
+      })
+      return temp
+    }else{
+      return []
+    }
     // res.nowarea.join(" ")
     // let temp =[]
     // if(this.address&&this.address.length>0){
@@ -76,16 +77,14 @@ export default {
     // }else{
     //   return []
     // }
-  }
-    
-  },
-  mounted(){
-      
+  // }
+    }
   },
   methods:{
-    editaddress(target){
+    editaddress(index){
      
-      this.$router.push({path:`/updatedizi/${target}`})
+      this.$router.push({path:'/updatedizi',
+      query:{index}})
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
 <van-overlay :show="show" @click="changeshowshopping" >
-   <div class="warpppp"  @click.stop>
+   <div class="warpppp"  @click.stop v-if="goods">
         <div class="introduce">
-          <img :src="goods.imgurl" >
-          <div class="middle"  >
+          <img :src="goods.imgurl">
+          <div class="middle" >
             <span >￥<em>{{goods.price}}</em>.00</span>
             <span>
               <em>已选</em>
@@ -45,26 +45,33 @@ export default {
    data() {
     return {
       show: false,
-
+      // good对象的值
+      list:{}
     }
+  },
+  mounted(){
+    
   },
   components:{
       [Overlay.name]:Overlay,
   },
+
   methods:{
        //这是点击了确定按钮
       updatecartgoods(){
         let key="complete"
         let value = true
-        this.goods[key]=value
-        console.log(this.goods)
-        this.$store.dispatch('updatecartgoods',this.goods)
+        this.list[key]=value
+        // console.log(this.goods)
+        this.$store.dispatch('updatecartgoods',this.list)
         this.show = !this.show
         Toast({
         message: '加入购物车',
         position: 'middle',
         duration: 2000
       });
+  
+
       },
          changeshowshopping(){
         this.show = !this.show
@@ -88,9 +95,17 @@ export default {
           } 
         }
       },
+      //重新给goods组件赋值
+    //  updategood(){
+    //    console.log(this.goods)
+    //    this.list = this.goods
+    //    console.log(this.list)
+    //  }
       
    
-  }
+  },
+    
+    
 }
 </script>
 

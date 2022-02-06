@@ -8,7 +8,8 @@ RECEIVE_ADDRESS ,
 ADD_ADDRESS ,
 UPDATA_ADDRESS,
 DELETE_ADDRESS,
-SELECT_ALL_TODOS
+SELECT_ALL_TODOS,
+DETAIL_GOOD
 
 } from "./mutation-type";
 
@@ -42,6 +43,12 @@ export default{
     }
    
   },
+  //详情中的商品数据
+    addgood({commit},good){
+      commit(DETAIL_GOOD,{good})
+    },
+
+
   deletecartshop({commit},index){
     commit(CARTGOODS_DELETE,{index})
   },
@@ -55,9 +62,9 @@ export default{
   },
   //添加收货地址信息
   
-  addAddress({commit},{...addresslist}){
+  addAddress({commit},adress){
     
-    commit(ADD_ADDRESS,{...addresslist})
+    commit(ADD_ADDRESS,{adress})
   },
   //更新收货地址信息
   updateAddress({commit},{index,...AddressList}){

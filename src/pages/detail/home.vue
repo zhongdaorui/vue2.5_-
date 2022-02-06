@@ -166,7 +166,7 @@
     </Gallary>
   </div>   
   </div>
-  <Good ref="good" :goods="good"/>
+  <Good ref="good" :goods="itemDetail" />
 </div>
   
 </template>
@@ -190,6 +190,9 @@ export default {
       '//m.360buyimg.com/mobilecms/s843x843_jfs/t8677/324/1257355457/138314/3993660b/59b75894N0d83e8ec.jpg!q70.dpg.webp',
       ],
       showgallary:false,
+      id:0,
+      //详情列表
+      itemDetail:{}
     
     }
   },
@@ -213,19 +216,53 @@ export default {
       }
     },
     mounted(){
-     
+      // const id = this.id;
+      // // this.itemDetail = this.goods[id]
+      //  this.itemDetail = this.goods.find(detail => detail.id===id*1)
+      
     },
     deactivated(){
       this.showgallary=false
      
     },
-
+    // watch:{
+    //    $route(value) {
+    
+    //     const id = value.query.id
+    //     this.id = id
+    //     //箭头函数写法参数中的小括号和函数体中的大括号必须一起省略
+    //     const result = this.goods.find(item=>
+    //       item.id === id*1
+    //     )
+    //     console.log(result)
+    //     console.log(id)
+    //     this.itemDetail = result  
+       
+            
+    // },
+       
+    // },
+//A->B的时候,路由已经改变,b组件才初始化,$router才被监听，所以不会触发，
+    // 加上immedinate,让他第一次也触发
+    watch:{
+      '$route':{
+        handler(to, from){
+        const id = to.query.id
+        this.id = id
+        //箭头函数写法参数中的小括号和函数体中的大括号必须一起省略
+        const result = this.goods.find(item=>
+          item.id === id*1
+        )
+        console.log(result)
+        console.log(id)
+        this.itemDetail = result  
+        },
+        immediate: true
+}
+    },
   computed:{
     ...mapState(['cartgoods','goods']),
-      good(){
-        return this.goods[0]
-     
-    }
+    
   },
   components:{
  
@@ -243,7 +280,7 @@ export default {
   height 100%
   .inner
     .top
-      z-index 0
+      z-id 0
       position relative
       height 440px
       .swiper_top
@@ -253,7 +290,7 @@ export default {
         right 0
         bottom 0  
         width 100%
-        z-index 1
+        z-id 1
         & span:nth-of-type(1)  
           position absolute
           left 3px
@@ -266,7 +303,7 @@ export default {
           text-align center
           background-color #a8a8a8
           border-radius 40px
-          z-index 2
+          z-id 2
         & span:nth-of-type(2)  
           position absolute
           right  8px
@@ -279,7 +316,7 @@ export default {
           text-align center
           background-color #a8a8a8
           border-radius 40px
-           z-index 3
+           z-id 3
         & span:nth-of-type(3)
           position absolute
           left 186px
@@ -292,7 +329,7 @@ export default {
           background-size 100% 100%
           line-height 35px
           text-align center
-          z-index 4
+          z-id 4
         & span:nth-of-type(4)
           position absolute
           width 74px
@@ -304,7 +341,7 @@ export default {
           line-height 21px
           text-align center
           font-size 12px
-          z-index 5
+          z-id 5
       .price_title
         border-radius 0 0 30px 30px
         padding 16px 20px 17px
@@ -620,7 +657,7 @@ export default {
           position absolute
           top 0
           left 5px
-          z-index 2
+          z-id 2
         .contain
           .outer
             .count
@@ -628,7 +665,7 @@ export default {
               position absolute
               left 25px
               top 0px 
-              z-index 9999
+              z-id 9999
               color red
               border 1px solid red
               width 12px

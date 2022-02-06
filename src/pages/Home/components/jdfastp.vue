@@ -62,9 +62,9 @@
         </ul>
       </div>
     </div>
-    <div class="goods_list" @click="$router.push('/detail')">
+    <div class="goods_list">
       <ul>
-        <li v-for="(item,index) in goods" :key="index">
+        <li v-for="(item,index) in goods" :key="index" @click="todetail(item.id)">
           <img :src="item.imgurl" alt="">
           <div class="wenzi">
             <div class="nian">
@@ -95,9 +95,16 @@
 import {mapState} from 'vuex'
 export default {
   methods:{
+    todetail(target){
+     
+      this.$router.push({path:'/detail',
+      query:{id:target}
+      })
+    }
 },
  mounted(){
    this.$store.dispatch('getgoods')
+   
   
 },
 computed:{

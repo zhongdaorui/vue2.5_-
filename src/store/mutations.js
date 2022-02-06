@@ -9,7 +9,8 @@ import { RECEIVE_USER_INFO,
   ADD_ADDRESS,
   UPDATA_ADDRESS,
   DELETE_ADDRESS,
-  SELECT_ALL_TODOS
+  SELECT_ALL_TODOS,
+  DETAIL_GOOD
 
 } from "./mutation-type";
 export default{
@@ -35,17 +36,23 @@ export default{
   [ RECEIVE_ADDRESS](state,{addressslist}){
     state.address = addressslist
   },
+  //详情中的商品
+  [DETAIL_GOOD](state,{good}){
+    state.detailgood.push(good)
+  },
   
-  
-  [ADD_ADDRESS](state,{...addresslist}){
-   
-    state.address.push(addresslist)
+  [ADD_ADDRESS](state,{adress}){
+    state.address.push(adress)
   
  
   },
   [UPDATA_ADDRESS](state,{index,...AddressList}){
     
+    
+
     state.address.splice(index,1,AddressList)
+    console.log(state.address)
+    
   },
   [DELETE_ADDRESS](state,{index}){
     state.address.splice(index,1)
